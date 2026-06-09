@@ -1,558 +1,350 @@
-# 🍃 Spring Boot Roadmap: Beginner to Advanced
+# 🚀 Spring Boot Roadmap: Beginner to Advanced
 
-## 📖 What is Spring Boot?
+<p align="center">
+  <img src="Roadmap/springboot-roadmap-poster.png" alt="Spring Boot Roadmap" width="900">
+</p>
 
-Spring Boot is a Java-based framework built on top of the Spring Framework that simplifies the development of production-ready applications.
+<p align="center">
+  <strong>A Complete Spring Boot Learning Repository for Beginners to Advanced Developers.</strong>
+</p>
 
-It helps developers build:
-
-* REST APIs
-* Microservices
-* Web Applications
-* Enterprise Applications
-* Cloud-Native Applications
-
----
-
-# 🚀 Why Learn Spring Boot?
-
-✅ Industry Standard for Java Backend Development
-
-✅ Easy Configuration
-
-✅ Embedded Servers (Tomcat, Jetty)
-
-✅ Microservices Support
-
-✅ Fast Development
-
-✅ High Demand in Companies
+<p align="center">
+  Learn • Build Projects • Master Backend Development • Crack Interviews
+</p>
 
 ---
 
-# 📅 Phase 1: Java Fundamentals
+# 📖 About
 
-Before learning Spring Boot, you should know:
+This repository provides a structured roadmap to learn **Spring Boot** from scratch and become a proficient Backend Developer.
 
-## Core Java
+Whether you are preparing for:
 
-### Topics
+- 💼 SDE Internships
+- 🏢 Product-Based Companies
+- 🌐 Backend Development
+- ☁️ Microservices Architecture
+- 🚀 Open Source Contributions
 
-* Variables
-* Data Types
-* Operators
-* Loops
-* Functions
-* Arrays
-* Strings
-* Collections
-* Exception Handling
-* File Handling
+This roadmap will help you learn step by step.
 
 ---
 
-## OOP Concepts
+# 🛣️ Learning Roadmap
 
-### Learn
+## 🟢 Beginner
 
-* Class & Object
-* Encapsulation
-* Inheritance
-* Polymorphism
-* Abstraction
-
-Example:
-
-```java
-class Student {
-    String name;
-
-    Student(String name) {
-        this.name = name;
-    }
-}
-```
+- Introduction to Java
+- OOP Concepts
+- Collections Framework
+- Exception Handling
+- Multithreading Basics
+- Maven & Gradle
+- What is Spring?
+- What is Spring Boot?
+- Spring Boot Architecture
+- Spring Initializr
+- Project Structure
+- Application Properties
+- Dependency Injection
+- Inversion of Control (IoC)
+- Bean Lifecycle
 
 ---
 
-# 📅 Phase 2: Introduction to Spring
+## 🔵 Intermediate
 
-## What is Spring Framework?
-
-Spring Framework is a Java framework for building enterprise applications.
-
-### Core Concepts
-
-* Dependency Injection (DI)
-* Inversion of Control (IoC)
-* Bean Management
-
----
-
-## Dependency Injection
-
-```java
-@Service
-public class UserService {
-
-}
-```
+- REST API Development
+- HTTP Methods
+- CRUD Operations
+- Request Mapping
+- Path Variables
+- Request Parameters
+- Request Body
+- Response Entity
+- Validation
+- Global Exception Handling
+- Logging
+- Lombok
+- Configuration Properties
 
 ---
 
-# 📅 Phase 3: Spring Boot Fundamentals
+## 🟣 Database Integration
 
-## Creating a Spring Boot Project
-
-Use:
-
-* Spring Initializr
-* IntelliJ IDEA
-* VS Code
-* Eclipse
+- JDBC
+- Spring Data JPA
+- Hibernate
+- Entity Mapping
+- Relationships
+- MySQL Integration
+- PostgreSQL Integration
+- MongoDB Basics
+- Pagination & Sorting
+- JPQL
+- Native Queries
 
 ---
 
-## Project Structure
+## 🟠 Security
+
+- Spring Security
+- Authentication
+- Authorization
+- JWT Authentication
+- Role-Based Access Control
+- Password Encryption
+- OAuth2 Basics
+
+---
+
+## 🔴 Advanced
+
+- Microservices
+- API Gateway
+- Service Discovery
+- Circuit Breaker
+- Config Server
+- Docker
+- Kubernetes Basics
+- Redis Caching
+- RabbitMQ
+- Kafka
+- Scheduling
+- Async Programming
+- WebSocket
+- File Upload & Download
+
+---
+
+## ⚫ Expert
+
+- System Design Basics
+- Clean Architecture
+- Design Patterns
+- Unit Testing
+- Integration Testing
+- JUnit 5
+- Mockito
+- Performance Optimization
+- CI/CD
+- AWS Deployment
+- Monitoring & Logging
+
+---
+
+# 📂 Repository Structure
 
 ```text
-src/
-├── main/
-│   ├── java/
-│   │   ├── controller/
-│   │   ├── service/
-│   │   ├── repository/
-│   │   ├── model/
-│   │
-│   ├── resources/
-│       ├── application.properties
-```
-
----
-
-## Main Class
-
-```java
-@SpringBootApplication
-public class Application {
-
-    public static void main(String[] args) {
-        SpringApplication.run(
-            Application.class,
-            args
-        );
-    }
-}
-```
-
----
-
-# 📅 Phase 4: REST API Development
-
-## Controller
-
-```java
-@RestController
-public class HomeController {
-
-    @GetMapping("/")
-    public String home() {
-        return "Hello Spring Boot";
-    }
-}
-```
-
----
-
-## HTTP Methods
-
-### GET
-
-```java
-@GetMapping("/users")
-```
-
-### POST
-
-```java
-@PostMapping("/users")
-```
-
-### PUT
-
-```java
-@PutMapping("/users/{id}")
-```
-
-### DELETE
-
-```java
-@DeleteMapping("/users/{id}")
-```
-
----
-
-## Request Body
-
-```java
-@PostMapping("/users")
-public User createUser(
-        @RequestBody User user
-) {
-    return user;
-}
-```
-
----
-
-## Path Variables
-
-```java
-@GetMapping("/users/{id}")
-public String getUser(
-        @PathVariable Long id
-) {
-    return "User " + id;
-}
-```
-
----
-
-# 📅 Phase 5: Database Integration
-
-## JPA & Hibernate
-
-### Dependencies
-
-```xml
-<dependency>
-    <groupId>
-        org.springframework.boot
-    </groupId>
-    <artifactId>
-        spring-boot-starter-data-jpa
-    </artifactId>
-</dependency>
-```
-
----
-
-## Entity
-
-```java
-@Entity
-public class User {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    private String name;
-}
-```
-
----
-
-## Repository
-
-```java
-@Repository
-public interface UserRepository
-        extends JpaRepository<User, Long> {
-
-}
-```
-
----
-
-# CRUD Operations
-
-## Create
-
-```java
-userRepository.save(user);
-```
-
-## Read
-
-```java
-userRepository.findAll();
-```
-
-## Update
-
-```java
-userRepository.save(user);
-```
-
-## Delete
-
-```java
-userRepository.deleteById(id);
-```
-
----
-
-# 📅 Phase 6: Service Layer
-
-```java
-@Service
-public class UserService {
-
-    private final UserRepository userRepository;
-
-    public UserService(
-            UserRepository userRepository
-    ) {
-        this.userRepository = userRepository;
-    }
-}
-```
-
----
-
-# 📅 Phase 7: Validation
-
-## Bean Validation
-
-```java
-@NotBlank
-private String name;
-```
-
-### Common Annotations
-
-* @NotNull
-* @NotBlank
-* @Email
-* @Size
-
----
-
-# 📅 Phase 8: Exception Handling
-
-## Global Exception Handler
-
-```java
-@RestControllerAdvice
-public class GlobalExceptionHandler {
-
-}
-```
-
----
-
-# 📅 Phase 9: Spring Security
-
-## Learn
-
-* Authentication
-* Authorization
-* Role-Based Access
-
----
-
-## Security Dependency
-
-```xml
-<dependency>
-    <groupId>
-        org.springframework.boot
-    </groupId>
-    <artifactId>
-        spring-boot-starter-security
-    </artifactId>
-</dependency>
-```
-
----
-
-# JWT Authentication
-
-### Dependencies
-
-```xml
-jjwt-api
-jjwt-impl
-jjwt-jackson
-```
-
----
-
-# 📅 Phase 10: Testing
-
-## JUnit
-
-```java
-@SpringBootTest
-class UserServiceTest {
-
-}
-```
-
----
-
-## Mockito
-
-Used for mocking dependencies.
-
----
-
-# 📅 Phase 11: Microservices
-
-## Learn
-
-* Microservices Architecture
-* API Gateway
-* Service Discovery
-* Load Balancing
-
----
-
-## Spring Cloud
-
-Modules:
-
-* Eureka
-* Gateway
-* Config Server
-
----
-
-# 📅 Phase 12: Deployment
-
-## Build Application
-
-```bash
-mvn clean package
-```
-
----
-
-## Run JAR
-
-```bash
-java -jar app.jar
-```
-
----
-
-## Docker
-
-Create Docker Image:
-
-```dockerfile
-FROM eclipse-temurin:21
-COPY target/app.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+SpringBoot-Roadmap/
+│
+├── README.md
+├── Roadmap/
+│   └── springboot-roadmap-poster.png
+│
+├── 01-Java-Basics/
+├── 02-OOP/
+├── 03-Collections/
+├── 04-Maven-Gradle/
+├── 05-Spring-Core/
+├── 06-Spring-Boot/
+├── 07-REST-API/
+├── 08-Spring-Data-JPA/
+├── 09-Hibernate/
+├── 10-Database/
+├── 11-Validation/
+├── 12-Exception-Handling/
+├── 13-Spring-Security/
+├── 14-JWT/
+├── 15-Microservices/
+├── 16-Docker/
+├── 17-Kafka-RabbitMQ/
+├── 18-Testing/
+├── 19-System-Design/
+├── 20-Projects/
+└── Resources/
 ```
 
 ---
 
 # 🛠 Tech Stack
 
-* Java
-* Spring Boot
-* Spring MVC
-* Spring Data JPA
-* Hibernate
-* MySQL
-* PostgreSQL
-* Spring Security
-* JWT
-* Maven
-* Docker
+- Java 17+
+- Spring Framework
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- MySQL
+- PostgreSQL
+- MongoDB
+- Maven
+- Gradle
+- Git & GitHub
+- Docker
+- Kubernetes
+- Kafka
+- RabbitMQ
+- Redis
 
 ---
 
-# 💼 Projects
+# 🚀 Projects
 
 ## Beginner
 
-* Student Management System
-* Employee Management API
-* Library Management System
-
----
+- Hello Spring Boot
+- Calculator API
+- Student Management System
 
 ## Intermediate
 
-* Expense Tracker API
-* Inventory Management System
-* Blog Backend
-
----
+- Employee Management API
+- Library Management System
+- Inventory Management System
 
 ## Advanced
 
-* E-Commerce Backend
-* Food Delivery Backend
-* Banking System
-* URL Shortener
-* Microservices Project
+- Authentication System
+- Blog REST API
+- E-Commerce Backend
+- File Storage System
+
+## Expert
+
+- Banking Application
+- Food Delivery Backend
+- Hospital Management System
+- Microservices-Based E-Commerce
+- Real-Time Chat Application
 
 ---
 
-# 📂 Recommended Project Structure
+# 📚 Learning Resources
 
-```text
-src/main/java
-│
-├── controller
-├── service
-├── repository
-├── model
-├── dto
-├── exception
-├── config
-└── security
-```
+## Official Documentation
 
----
+https://spring.io/projects/spring-boot
 
-# 🎯 Interview Topics
+## Spring Guides
 
-* Dependency Injection
-* IoC Container
-* Spring Bean Lifecycle
-* REST APIs
-* JPA & Hibernate
-* Transactions
-* Spring Security
-* JWT
-* Microservices
+https://spring.io/guides
+
+## Baeldung
+
+https://www.baeldung.com
+
+## Hibernate Documentation
+
+https://hibernate.org
 
 ---
 
-# 🏆 Outcome
+# 🎯 Interview Preparation
 
-After completing this roadmap, you will be able to:
+Topics covered:
 
-✅ Build REST APIs
-
-✅ Connect Databases
-
-✅ Implement Authentication
-
-✅ Use JPA & Hibernate
-
-✅ Write Unit Tests
-
-✅ Develop Microservices
-
-✅ Deploy Production Applications
-
-✅ Prepare for Java Backend Internships
+- Core Java
+- OOP
+- Collections
+- Multithreading
+- Spring Core
+- Spring Boot
+- REST APIs
+- JPA & Hibernate
+- SQL
+- Microservices
+- Spring Security
+- JWT
+- System Design
 
 ---
 
-# ⭐ Daily Study Plan
+# 📅 Suggested 8-Week Learning Plan
 
-* Java Revision → 1 Hour
-* Spring Boot Theory → 1 Hour
-* Coding → 1 Hour
-* Project Work → 1–2 Hours
+## Week 1
+- Java Basics
+- OOP
+- Collections
 
-Total: 4–5 Hours Daily
+## Week 2
+- Maven
+- Spring Core
+- Dependency Injection
 
-Happy Coding with Spring Boot! 🚀🍃
+## Week 3
+- Spring Boot
+- REST APIs
+- CRUD Operations
+
+## Week 4
+- JPA
+- Hibernate
+- Database Integration
+
+## Week 5
+- Validation
+- Exception Handling
+- Logging
+
+## Week 6
+- Spring Security
+- JWT Authentication
+
+## Week 7
+- Microservices
+- Docker
+- Redis
+- Kafka
+
+## Week 8
+- Testing
+- Deployment
+- Build Real Projects
+
+---
+
+# 🌟 Best Practices
+
+- Follow Clean Code principles
+- Use Layered Architecture
+- Write Unit Tests
+- Use DTOs
+- Handle Exceptions Globally
+- Secure APIs
+- Document APIs using Swagger
+- Containerize Applications with Docker
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a Pull Request
+
+---
+
+# ⭐ Support
+
+If this repository helps you, please give it a ⭐.
+
+It motivates me to create more educational content for the developer community.
+
+---
+
+# 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+<p align="center">
+<b>☕ Learn Spring Boot • Build Projects • Master Backend • Crack Interviews 🚀</b>
+</p>
+
+<p align="center">
+Made with ❤️ by Anup
+</p>
