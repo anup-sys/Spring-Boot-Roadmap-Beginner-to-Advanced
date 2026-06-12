@@ -1,0 +1,500 @@
+# Embedded Server 🌐
+
+## 📖 What is an Embedded Server?
+
+An **Embedded Server** is a web server that is packaged inside the Spring Boot application.
+
+Unlike traditional Java web applications, there is **no need to install or configure an external web server** like Tomcat separately.
+
+Spring Boot automatically starts the embedded server when the application runs.
+
+---
+
+# 🎯 Why Embedded Server?
+
+Before Spring Boot:
+
+❌ Install Tomcat
+
+❌ Configure Tomcat
+
+❌ Deploy WAR File
+
+❌ Restart Server Manually
+
+With Spring Boot:
+
+✅ Built-in Server
+
+✅ Run as a Standalone Application
+
+✅ No Manual Deployment
+
+✅ Faster Development
+
+---
+
+# 🌟 Popular Embedded Servers
+
+Spring Boot supports three embedded servers:
+
+| Server   | Description             |
+| -------- | ----------------------- |
+| Tomcat   | Default Embedded Server |
+| Jetty    | Lightweight Server      |
+| Undertow | High Performance Server |
+
+---
+
+# 🚀 Embedded Tomcat
+
+Tomcat is the default server in Spring Boot.
+
+When you add:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+Spring Boot automatically includes Embedded Tomcat.
+
+---
+
+# 🏗 Embedded Server Architecture
+
+```text
+Browser
+    │
+    ▼
+Embedded Tomcat
+    │
+    ▼
+DispatcherServlet
+    │
+    ▼
+Controller
+    │
+    ▼
+Service
+    │
+    ▼
+Repository
+    │
+    ▼
+Database
+```
+
+---
+
+# 🔄 How Embedded Server Works
+
+```text
+Run Application
+        │
+        ▼
+Spring Boot Starts
+        │
+        ▼
+Embedded Tomcat Starts
+        │
+        ▼
+Load Spring Context
+        │
+        ▼
+Application Ready
+        │
+        ▼
+Accept HTTP Requests
+```
+
+---
+
+# 💻 Spring Boot Main Class
+
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(
+            DemoApplication.class,
+            args
+        );
+
+    }
+
+}
+```
+
+When this class runs:
+
+* Spring Context Starts
+* Embedded Server Starts
+* Application becomes available
+
+---
+
+# 📄 Default Server Port
+
+By default, Spring Boot runs on:
+
+```text
+http://localhost:8080
+```
+
+---
+
+# ⚙ Change Server Port
+
+Using `application.properties`
+
+```properties
+server.port=9090
+```
+
+Now the application runs on:
+
+```text
+http://localhost:9090
+```
+
+---
+
+Using `application.yml`
+
+```yaml
+server:
+  port: 9090
+```
+
+---
+
+# 🌐 First REST API Example
+
+```java
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class HomeController {
+
+    @GetMapping("/")
+    public String home() {
+        return "Welcome to Spring Boot!";
+    }
+
+}
+```
+
+Open:
+
+```text
+http://localhost:8080
+```
+
+Output:
+
+```text
+Welcome to Spring Boot!
+```
+
+---
+
+# 🔥 Embedded Tomcat Startup Log
+
+```text
+Tomcat initialized with port(s): 8080 (http)
+
+Tomcat started on port(s): 8080
+
+Started DemoApplication
+```
+
+This means the embedded server is running successfully.
+
+---
+
+# 🚀 Using Jetty Instead of Tomcat
+
+Remove Tomcat:
+
+```xml
+<exclusion>
+    <groupId>
+        org.springframework.boot
+    </groupId>
+    <artifactId>
+        spring-boot-starter-tomcat
+    </artifactId>
+</exclusion>
+```
+
+Add Jetty:
+
+```xml
+<dependency>
+    <groupId>
+        org.springframework.boot
+    </groupId>
+    <artifactId>
+        spring-boot-starter-jetty
+    </artifactId>
+</dependency>
+```
+
+---
+
+# 🚀 Using Undertow
+
+```xml
+<dependency>
+    <groupId>
+        org.springframework.boot
+    </groupId>
+    <artifactId>
+        spring-boot-starter-undertow
+    </artifactId>
+</dependency>
+```
+
+Undertow is known for:
+
+* High Performance
+* Low Memory Usage
+* Asynchronous Processing
+
+---
+
+# 📊 Tomcat vs Jetty vs Undertow
+
+| Feature           | Tomcat   | Jetty     | Undertow  |
+| ----------------- | -------- | --------- | --------- |
+| Default           | ✅        | ❌         | ❌         |
+| Performance       | Good     | Very Good | Excellent |
+| Lightweight       | Moderate | Yes       | Yes       |
+| Community Support | Large    | Good      | Good      |
+
+---
+
+# 📦 JAR vs WAR Deployment
+
+## Spring Boot JAR
+
+```text
+Application
+      │
+      ▼
+Embedded Tomcat
+      │
+      ▼
+Run Directly
+```
+
+Command:
+
+```bash
+java -jar app.jar
+```
+
+---
+
+## Traditional WAR
+
+```text
+Application
+      │
+      ▼
+WAR File
+      │
+      ▼
+External Tomcat
+      │
+      ▼
+Deploy
+```
+
+---
+
+# ⚙ Useful Server Properties
+
+## Change Context Path
+
+```properties
+server.servlet.context-path=/api
+```
+
+URL:
+
+```text
+http://localhost:8080/api
+```
+
+---
+
+## Change Port
+
+```properties
+server.port=8081
+```
+
+---
+
+## Enable Compression
+
+```properties
+server.compression.enabled=true
+```
+
+---
+
+## Set Session Timeout
+
+```properties
+server.servlet.session.timeout=30m
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text
+Traditional Restaurant
+
+Build Kitchen
+Install Equipment
+Hire Staff
+Prepare Food
+
+Time Consuming
+
+--------------------------------
+
+Spring Boot Restaurant
+
+Kitchen Already Available
+
+Just Start Cooking
+
+Embedded Server works similarly.
+```
+
+---
+
+# ⭐ Advantages of Embedded Server
+
+* No External Installation
+* Easy Deployment
+* Standalone Application
+* Faster Development
+* Portable
+* Easy Testing
+
+---
+
+# ❌ Limitations
+
+* Slightly Higher Memory Usage
+* Less Flexible than Dedicated Servers
+* Large Enterprise Systems may use External Servers
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is an Embedded Server?
+
+An embedded server is a web server packaged inside the Spring Boot application.
+
+---
+
+### 2. Which server is used by default?
+
+Embedded Tomcat.
+
+---
+
+### 3. Which embedded servers are supported?
+
+* Tomcat
+* Jetty
+* Undertow
+
+---
+
+### 4. What is the default port?
+
+```text
+8080
+```
+
+---
+
+### 5. How do you change the server port?
+
+```properties
+server.port=9090
+```
+
+---
+
+### 6. What is the advantage of an Embedded Server?
+
+No need to install or configure an external web server.
+
+---
+
+### 7. Can Tomcat be replaced?
+
+Yes. It can be replaced with Jetty or Undertow.
+
+---
+
+### 8. What command runs a Spring Boot JAR?
+
+```bash
+java -jar app.jar
+```
+
+---
+
+### 9. What annotation starts the Spring Boot application?
+
+```java
+@SpringBootApplication
+```
+
+---
+
+### 10. Why is Embedded Server important?
+
+It simplifies deployment and allows Spring Boot applications to run independently.
+
+---
+
+# 📝 Summary
+
+* Embedded Server is a built-in web server.
+* Spring Boot uses Embedded Tomcat by default.
+* Jetty and Undertow are supported alternatives.
+* Default server port is 8080.
+* Server settings can be changed using `application.properties`.
+* Embedded servers make Spring Boot applications standalone and easy to deploy.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Spring Boot DevTools**
+
+* What is DevTools?
+* Automatic Restart
+* Live Reload
+* DevTools Dependency
+* Development Productivity
+* Best Practices
