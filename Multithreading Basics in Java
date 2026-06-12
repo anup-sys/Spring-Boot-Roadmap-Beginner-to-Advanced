@@ -1,0 +1,501 @@
+# Multithreading Basics in Java ☕
+
+## 📖 What is Multithreading?
+
+**Multithreading** is a feature in Java that allows a program to execute **multiple threads simultaneously**.
+
+A **Thread** is the smallest unit of execution within a process.
+
+Multithreading helps improve application performance by performing multiple tasks at the same time.
+
+---
+
+# 🎯 Why Use Multithreading?
+
+* Improves CPU Utilization
+* Faster Program Execution
+* Better User Experience
+* Executes Multiple Tasks Simultaneously
+* Efficient Resource Sharing
+
+### Real-Life Examples
+
+* Playing music while downloading a file
+* Chat applications
+* Online gaming
+* Banking systems
+* Web servers
+
+---
+
+# 🏗 Process vs Thread
+
+| Process             | Thread                  |
+| ------------------- | ----------------------- |
+| Independent program | Small unit of a process |
+| Heavyweight         | Lightweight             |
+| Separate memory     | Shared memory           |
+| Slower              | Faster                  |
+
+---
+
+# 📊 Multithreading Concept
+
+```text id="2w6vqe"
+          Process
+              │
+    ┌─────────┼─────────┐
+    │         │         │
+ Thread1   Thread2   Thread3
+```
+
+---
+
+# 🔄 Thread Life Cycle
+
+```text id="4tpxzq"
+New
+ │
+ ▼
+Runnable
+ │
+ ▼
+Running
+ │
+ ├────────► Blocked / Waiting
+ │                 │
+ ▼                 ▼
+Terminated ◄──── Runnable
+```
+
+### States
+
+* New
+* Runnable
+* Running
+* Blocked
+* Waiting
+* Terminated
+
+---
+
+# 🚀 Creating a Thread
+
+Java provides two ways:
+
+## 1️⃣ Extending Thread Class
+
+```java id="lyrjkg"
+class MyThread extends Thread {
+
+    public void run() {
+        System.out.println("Thread is Running...");
+    }
+
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        MyThread t1 = new MyThread();
+
+        t1.start();
+
+    }
+}
+```
+
+### Output
+
+```text id="wl7xhf"
+Thread is Running...
+```
+
+---
+
+## 2️⃣ Implementing Runnable Interface
+
+```java id="9gbnnt"
+class MyThread implements Runnable {
+
+    public void run() {
+        System.out.println("Thread is Running...");
+    }
+
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Thread t1 = new Thread(new MyThread());
+
+        t1.start();
+
+    }
+}
+```
+
+---
+
+# ⭐ Difference Between start() and run()
+
+| start()               | run()                         |
+| --------------------- | ----------------------------- |
+| Creates a new thread  | Executes like a normal method |
+| JVM manages execution | No new thread created         |
+
+```java id="tvjlwm"
+Thread t = new MyThread();
+
+t.start();
+```
+
+---
+
+# 🏃 Multiple Threads Example
+
+```java id="k0g1yy"
+class MyThread extends Thread {
+
+    public void run() {
+
+        for(int i=1; i<=5; i++) {
+            System.out.println(i);
+        }
+
+    }
+
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        MyThread t1 = new MyThread();
+        MyThread t2 = new MyThread();
+
+        t1.start();
+        t2.start();
+
+    }
+}
+```
+
+---
+
+# ⏳ Thread Methods
+
+## sleep()
+
+Pauses the current thread.
+
+```java id="2t4k7j"
+try {
+
+    Thread.sleep(2000);
+
+} catch(Exception e) {
+
+}
+```
+
+---
+
+## join()
+
+Waits for another thread to finish.
+
+```java id="tfrc8g"
+t1.start();
+
+t1.join();
+
+System.out.println("Main Thread");
+```
+
+---
+
+## isAlive()
+
+Checks whether a thread is running.
+
+```java id="qv2kv4"
+System.out.println(t1.isAlive());
+```
+
+---
+
+## getName()
+
+Returns thread name.
+
+```java id="93qov9"
+System.out.println(Thread.currentThread().getName());
+```
+
+---
+
+## setName()
+
+Changes thread name.
+
+```java id="ldk6ea"
+t1.setName("Worker Thread");
+```
+
+---
+
+# 🔒 Synchronization
+
+Synchronization prevents multiple threads from accessing shared resources simultaneously.
+
+Without synchronization:
+
+```text id="jftjlwm"
+Thread A ---> Bank Account
+Thread B ---> Bank Account
+
+Data Corruption Possible
+```
+
+With synchronization:
+
+```java id="s92vcq"
+class Table {
+
+    synchronized void printTable(int n){
+
+        for(int i=1;i<=5;i++){
+            System.out.println(n*i);
+        }
+
+    }
+
+}
+```
+
+---
+
+# 📢 Inter-Thread Communication
+
+Java provides methods:
+
+* wait()
+* notify()
+* notifyAll()
+
+These methods help threads communicate with each other.
+
+---
+
+# ⚡ Daemon Thread
+
+A daemon thread runs in the background.
+
+Examples:
+
+* Garbage Collector
+* Background Services
+
+```java id="0ykbny"
+t1.setDaemon(true);
+```
+
+---
+
+# 🏗 Runnable vs Thread Class
+
+| Thread Class                | Runnable Interface       |
+| --------------------------- | ------------------------ |
+| Inheritance                 | Interface                |
+| Cannot extend another class | Can extend another class |
+| Less Flexible               | More Flexible            |
+| Recommended ❌               | Recommended ✅            |
+
+---
+
+# 🚀 Lambda Expression with Thread
+
+```java id="08m5f3"
+Thread t = new Thread(() -> {
+
+    System.out.println("Thread Running");
+
+});
+
+t.start();
+```
+
+---
+
+# 🏢 Executor Framework
+
+The Executor Framework manages thread pools efficiently.
+
+```java id="7djlwm"
+import java.util.concurrent.*;
+
+ExecutorService service =
+Executors.newFixedThreadPool(3);
+
+service.execute(() -> {
+    System.out.println("Task Executed");
+});
+
+service.shutdown();
+```
+
+---
+
+# 📊 Thread Priorities
+
+Priority ranges:
+
+```text id="sz30zy"
+MIN_PRIORITY = 1
+
+NORM_PRIORITY = 5
+
+MAX_PRIORITY = 10
+```
+
+Example:
+
+```java id="8rvrgf"
+t1.setPriority(10);
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="eqld9d"
+ATM Machine
+
+Customer 1 ---> Withdraw Money
+Customer 2 ---> Deposit Money
+Customer 3 ---> Check Balance
+
+All work simultaneously using threads.
+```
+
+---
+
+# ⭐ Advantages of Multithreading
+
+* Better Performance
+* Resource Sharing
+* Faster Execution
+* Improved Responsiveness
+* Better CPU Utilization
+
+---
+
+# ❌ Disadvantages
+
+* Complex Programming
+* Difficult Debugging
+* Deadlock Possibility
+* Race Conditions
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is a Thread?
+
+A thread is the smallest unit of execution within a process.
+
+---
+
+### 2. What is Multithreading?
+
+Multithreading is the execution of multiple threads simultaneously.
+
+---
+
+### 3. How many ways can we create a thread?
+
+Two ways:
+
+* Extend Thread Class
+* Implement Runnable Interface
+
+---
+
+### 4. Which is better: Thread or Runnable?
+
+Runnable Interface is preferred because Java supports single inheritance.
+
+---
+
+### 5. Difference between start() and run()?
+
+| start()            | run()              |
+| ------------------ | ------------------ |
+| Creates new thread | Normal method call |
+
+---
+
+### 6. What is Synchronization?
+
+Synchronization controls access to shared resources to avoid data inconsistency.
+
+---
+
+### 7. What is a Daemon Thread?
+
+A background thread that provides services to user threads.
+
+---
+
+### 8. What is Thread Life Cycle?
+
+* New
+* Runnable
+* Running
+* Blocked
+* Waiting
+* Terminated
+
+---
+
+### 9. What is Deadlock?
+
+A situation where two or more threads wait indefinitely for each other.
+
+---
+
+### 10. What is Race Condition?
+
+When multiple threads access shared data simultaneously and produce unexpected results.
+
+---
+
+# 📝 Summary
+
+* A thread is a lightweight process.
+* Java supports multithreading for concurrent execution.
+* Threads can be created using:
+
+  * Thread Class
+  * Runnable Interface
+* Synchronization prevents data inconsistency.
+* Executor Framework efficiently manages threads.
+* Multithreading improves application performance.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Maven & Gradle**
+
+* What is Build Tool?
+* Maven Architecture
+* pom.xml
+* Dependencies
+* Plugins
+* Gradle Basics
+* Build Lifecycle
