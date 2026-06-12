@@ -1,0 +1,589 @@
+# Bean Lifecycle 🌱
+
+## 📖 What is Bean Lifecycle?
+
+The **Bean Lifecycle** is the sequence of steps that a Spring Bean goes through from its creation to its destruction.
+
+The Spring IoC Container manages the entire lifecycle of a Bean.
+
+In simple words:
+
+> **Bean Lifecycle = Creation → Initialization → Ready to Use → Destruction**
+
+---
+
+# 🎯 Why Understand Bean Lifecycle?
+
+Understanding the Bean Lifecycle helps developers:
+
+* ✅ Manage Resources
+* ✅ Initialize Objects
+* ✅ Release Resources Properly
+* ✅ Customize Bean Behavior
+* ✅ Build Efficient Applications
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="bl1"
+Mobile Phone
+
+Manufacturing
+       │
+       ▼
+Assembly
+       │
+       ▼
+Quality Check
+       │
+       ▼
+Ready to Use
+       │
+       ▼
+Disposed
+```
+
+Similarly, a Spring Bean follows a lifecycle.
+
+---
+
+# 🏗 Bean Lifecycle Flow
+
+```text id="bl2"
+Bean Definition
+        │
+        ▼
+Bean Instantiation
+        │
+        ▼
+Dependency Injection
+        │
+        ▼
+Aware Interfaces
+        │
+        ▼
+@PostConstruct
+        │
+        ▼
+InitializingBean
+        │
+        ▼
+Custom Init Method
+        │
+        ▼
+Bean Ready
+        │
+        ▼
+Application Running
+        │
+        ▼
+@PreDestroy
+        │
+        ▼
+DisposableBean
+        │
+        ▼
+Custom Destroy Method
+        │
+        ▼
+Bean Destroyed
+```
+
+---
+
+# 🏷 Step 1: Bean Instantiation
+
+Spring creates the Bean object.
+
+Example:
+
+```java id="bl3"
+@Component
+public class Student {
+
+}
+```
+
+The Spring Container creates the object automatically.
+
+---
+
+# 🏷 Step 2: Dependency Injection
+
+Spring injects required dependencies.
+
+```java id="bl4"
+@Component
+class Engine {
+
+}
+
+@Component
+class Car {
+
+    private final Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+}
+```
+
+---
+
+# 🏷 Step 3: Aware Interfaces
+
+Spring provides additional information to Beans.
+
+Common Aware Interfaces:
+
+* BeanNameAware
+* BeanFactoryAware
+* ApplicationContextAware
+
+Example:
+
+```java id="bl5"
+public class Student
+implements BeanNameAware {
+
+    @Override
+    public void setBeanName(
+            String name) {
+
+        System.out.println(name);
+
+    }
+
+}
+```
+
+---
+
+# 🏷 Step 4: @PostConstruct
+
+Executed immediately after dependency injection.
+
+```java id="bl6"
+import jakarta.annotation.PostConstruct;
+
+@Component
+public class Student {
+
+    @PostConstruct
+    public void init() {
+        System.out.println(
+            "Bean Initialized"
+        );
+    }
+
+}
+```
+
+### Output
+
+```text id="bl7"
+Bean Initialized
+```
+
+---
+
+# 🏷 Step 5: InitializingBean
+
+The `afterPropertiesSet()` method is called after all properties are injected.
+
+```java id="bl8"
+import org.springframework.beans.factory.InitializingBean;
+
+@Component
+public class Student
+implements InitializingBean {
+
+    @Override
+    public void afterPropertiesSet() {
+
+        System.out.println(
+            "afterPropertiesSet Called"
+        );
+
+    }
+
+}
+```
+
+---
+
+# 🏷 Step 6: Custom Init Method
+
+You can define your own initialization method.
+
+```java id="bl9"
+@Bean(initMethod = "start")
+public Student student() {
+    return new Student();
+}
+```
+
+```java id="bl10"
+public class Student {
+
+    public void start() {
+        System.out.println(
+            "Custom Init Method"
+        );
+    }
+
+}
+```
+
+---
+
+# 🏷 Step 7: Bean Ready
+
+The Bean is fully initialized and available for use.
+
+```text id="bl11"
+Spring Container
+        │
+        ▼
+Bean Ready
+        │
+        ▼
+Application Uses Bean
+```
+
+---
+
+# 🏷 Step 8: @PreDestroy
+
+Executed before the Bean is destroyed.
+
+```java id="bl12"
+import jakarta.annotation.PreDestroy;
+
+@Component
+public class Student {
+
+    @PreDestroy
+    public void destroy() {
+
+        System.out.println(
+            "Bean Destroyed"
+        );
+
+    }
+
+}
+```
+
+---
+
+# 🏷 Step 9: DisposableBean
+
+Spring calls the `destroy()` method.
+
+```java id="bl13"
+import org.springframework.beans.factory.DisposableBean;
+
+@Component
+public class Student
+implements DisposableBean {
+
+    @Override
+    public void destroy() {
+
+        System.out.println(
+            "DisposableBean Destroy"
+        );
+
+    }
+
+}
+```
+
+---
+
+# 🏷 Step 10: Custom Destroy Method
+
+Custom cleanup method.
+
+```java id="bl14"
+@Bean(destroyMethod = "stop")
+public Student student() {
+    return new Student();
+}
+```
+
+```java id="bl15"
+public class Student {
+
+    public void stop() {
+        System.out.println(
+            "Custom Destroy Method"
+        );
+    }
+
+}
+```
+
+---
+
+# 📊 Complete Bean Lifecycle Example
+
+```java id="bl16"
+@Component
+public class Student {
+
+    public Student() {
+        System.out.println(
+            "Constructor Called"
+        );
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println(
+            "Bean Initialized"
+        );
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println(
+            "Bean Destroyed"
+        );
+    }
+
+}
+```
+
+### Output
+
+```text id="bl17"
+Constructor Called
+
+Bean Initialized
+
+Application Running
+
+Bean Destroyed
+```
+
+---
+
+# 🏗 Bean Lifecycle Architecture
+
+```text id="bl18"
+Spring Boot Starts
+         │
+         ▼
+Create Bean
+         │
+         ▼
+Inject Dependencies
+         │
+         ▼
+@PostConstruct
+         │
+         ▼
+Bean Ready
+         │
+         ▼
+Application Running
+         │
+         ▼
+@PreDestroy
+         │
+         ▼
+Bean Removed
+```
+
+---
+
+# ⚠ Singleton vs Prototype Bean Lifecycle
+
+## Singleton Bean
+
+Spring manages the complete lifecycle.
+
+```text id="bl19"
+Create
+   │
+   ▼
+Initialize
+   │
+   ▼
+Destroy
+```
+
+---
+
+## Prototype Bean
+
+Spring creates the Bean but does not manage destruction.
+
+```text id="bl20"
+Create
+   │
+   ▼
+Initialize
+
+(No automatic destroy)
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="bl21"
+Hotel Room
+
+Book Room
+     │
+     ▼
+Prepare Room
+     │
+     ▼
+Customer Uses Room
+     │
+     ▼
+Clean Room
+     │
+     ▼
+Room Available Again
+
+Spring Bean Lifecycle works similarly.
+```
+
+---
+
+# ⭐ Advantages of Bean Lifecycle
+
+* Automatic Resource Management
+* Proper Initialization
+* Automatic Cleanup
+* Better Memory Management
+* Simplifies Development
+
+---
+
+# ❌ Limitations
+
+* Additional Learning Curve
+* Prototype Beans Need Manual Cleanup
+* Too Many Lifecycle Hooks Can Increase Complexity
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Bean Lifecycle?
+
+The sequence of Bean creation, initialization, usage, and destruction.
+
+---
+
+### 2. What is @PostConstruct?
+
+A method executed after dependency injection.
+
+---
+
+### 3. What is @PreDestroy?
+
+A method executed before Bean destruction.
+
+---
+
+### 4. What is InitializingBean?
+
+An interface that provides the `afterPropertiesSet()` method.
+
+---
+
+### 5. What is DisposableBean?
+
+An interface that provides the `destroy()` method.
+
+---
+
+### 6. What is a Custom Init Method?
+
+A user-defined initialization method configured using `@Bean(initMethod=...)`.
+
+---
+
+### 7. What is a Custom Destroy Method?
+
+A user-defined cleanup method configured using `@Bean(destroyMethod=...)`.
+
+---
+
+### 8. Does Spring destroy Prototype Beans?
+
+No. Spring does not automatically destroy Prototype Beans.
+
+---
+
+### 9. Which Bean Scope is fully managed by Spring?
+
+✅ Singleton
+
+---
+
+### 10. What is the correct Bean Lifecycle order?
+
+```text id="bl22"
+Instantiation
+      │
+      ▼
+Dependency Injection
+      │
+      ▼
+@PostConstruct
+      │
+      ▼
+Bean Ready
+      │
+      ▼
+@PreDestroy
+      │
+      ▼
+Bean Destroyed
+```
+
+---
+
+# 📝 Summary
+
+* Bean Lifecycle describes how Spring manages a Bean.
+* Main phases:
+
+  * Bean Creation
+  * Dependency Injection
+  * Initialization
+  * Ready to Use
+  * Destruction
+* `@PostConstruct` is called after initialization.
+* `@PreDestroy` is called before destruction.
+* Singleton Beans are fully managed by Spring.
+* Prototype Beans require manual cleanup.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Spring Annotations**
+
+* @Component
+* @Service
+* @Repository
+* @Controller
+* @RestController
+* @Autowired
+* @Bean
+* @Configuration
+* @Primary
+* @Qualifier
