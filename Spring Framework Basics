@@ -1,0 +1,483 @@
+# Spring Framework Basics 🌱
+
+## 📖 What is Spring Framework?
+
+**Spring Framework** is a powerful, lightweight, and open-source Java framework used to develop enterprise-level applications.
+
+It simplifies Java development by providing infrastructure support for building robust, scalable, and maintainable applications.
+
+Spring was created by **Rod Johnson** and was first released in **2003**.
+
+---
+
+# 🎯 Why Spring Framework?
+
+Before Spring, Java Enterprise applications were complex and required large amounts of configuration.
+
+Spring solves these problems by providing:
+
+* ✅ Lightweight Framework
+* ✅ Dependency Injection (DI)
+* ✅ Inversion of Control (IoC)
+* ✅ Aspect-Oriented Programming (AOP)
+* ✅ Easy Database Integration
+* ✅ Transaction Management
+* ✅ Modular Architecture
+* ✅ Integration with Other Frameworks
+
+---
+
+# 🏗 Spring Framework Architecture
+
+```text
+                    Spring Framework
+                            │
+     ┌──────────────────────┼──────────────────────┐
+     │                      │                      │
+ Core Container         Data Access              Web
+     │                      │                      │
+ IoC Container         JDBC / ORM           Spring MVC
+     │
+     ├── Beans
+     ├── Core
+     ├── Context
+     └── Expression Language
+```
+
+---
+
+# 🌟 Features of Spring Framework
+
+## 1. Lightweight
+
+Spring is lightweight because it uses Plain Old Java Objects (POJOs).
+
+---
+
+## 2. Dependency Injection (DI)
+
+Objects do not create their own dependencies.
+
+Instead, Spring provides them automatically.
+
+---
+
+## 3. Inversion of Control (IoC)
+
+Spring manages the lifecycle and creation of objects.
+
+---
+
+## 4. Aspect-Oriented Programming (AOP)
+
+Separates cross-cutting concerns like:
+
+* Logging
+* Security
+* Transaction Management
+
+---
+
+## 5. Modular Design
+
+Spring consists of independent modules that can be used separately.
+
+---
+
+# 📦 Spring Modules
+
+## Core Container
+
+* spring-core
+* spring-beans
+* spring-context
+* spring-expression
+
+---
+
+## Data Access
+
+* JDBC
+* ORM
+* Transactions
+
+---
+
+## Web Module
+
+* Spring MVC
+* REST APIs
+* WebSocket
+
+---
+
+## AOP Module
+
+* Logging
+* Security
+* Transaction Management
+
+---
+
+## Testing Module
+
+* JUnit Integration
+* Mockito Support
+
+---
+
+# 🏗 What is IoC (Inversion of Control)?
+
+IoC means that the control of object creation is transferred from the programmer to the Spring Framework.
+
+Without Spring:
+
+```java
+Student student = new Student();
+```
+
+With Spring:
+
+```text
+Spring Container
+        │
+        ▼
+Creates Object
+        │
+        ▼
+Provides Object to Application
+```
+
+---
+
+# 💉 What is Dependency Injection (DI)?
+
+Dependency Injection is a design pattern where Spring injects required objects into another object.
+
+Example:
+
+```text
+Car
+ │
+Engine
+```
+
+Instead of Car creating Engine, Spring provides the Engine object.
+
+---
+
+## Types of Dependency Injection
+
+### Constructor Injection
+
+```java
+public class Student {
+
+    private Course course;
+
+    public Student(Course course){
+        this.course = course;
+    }
+
+}
+```
+
+---
+
+### Setter Injection
+
+```java
+public void setCourse(Course course){
+    this.course = course;
+}
+```
+
+---
+
+# 🫘 Spring Beans
+
+A **Bean** is an object managed by the Spring IoC Container.
+
+Example:
+
+```java
+@Component
+public class Student {
+
+}
+```
+
+Spring automatically creates and manages this object.
+
+---
+
+# ⚙ Bean Lifecycle
+
+```text
+Bean Created
+      │
+      ▼
+Dependency Injection
+      │
+      ▼
+Initialization
+      │
+      ▼
+Bean Ready
+      │
+      ▼
+Destroy
+```
+
+---
+
+# 📚 Bean Scopes
+
+| Scope       | Description                 |
+| ----------- | --------------------------- |
+| Singleton   | One object per container    |
+| Prototype   | New object every request    |
+| Request     | One object per HTTP request |
+| Session     | One object per user session |
+| Application | One object per application  |
+
+---
+
+# 🏷 Spring Annotations
+
+## @Component
+
+Marks a class as a Spring Bean.
+
+```java
+@Component
+class Student {
+
+}
+```
+
+---
+
+## @Autowired
+
+Automatically injects dependencies.
+
+```java
+@Autowired
+private Student student;
+```
+
+---
+
+## @Configuration
+
+Indicates a configuration class.
+
+```java
+@Configuration
+public class AppConfig {
+
+}
+```
+
+---
+
+## @Bean
+
+Defines a bean manually.
+
+```java
+@Bean
+public Student student(){
+    return new Student();
+}
+```
+
+---
+
+# 🌐 Spring Container
+
+The Spring Container is responsible for:
+
+* Creating Beans
+* Managing Beans
+* Injecting Dependencies
+* Controlling Bean Lifecycle
+
+There are two types:
+
+## BeanFactory
+
+* Basic Container
+* Lightweight
+
+## ApplicationContext
+
+* Advanced Container
+* Most commonly used
+
+---
+
+# 📊 BeanFactory vs ApplicationContext
+
+| BeanFactory   | ApplicationContext |
+| ------------- | ------------------ |
+| Basic         | Advanced           |
+| Lazy Loading  | Eager Loading      |
+| Less Features | More Features      |
+
+---
+
+# 🔄 Spring Application Flow
+
+```text
+Java Class
+     │
+     ▼
+Spring Configuration
+     │
+     ▼
+IoC Container
+     │
+     ▼
+Bean Creation
+     │
+     ▼
+Dependency Injection
+     │
+     ▼
+Application Ready
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text
+Restaurant
+
+Customer
+    │
+    ▼
+Orders Food
+    │
+    ▼
+Chef Prepares Food
+    │
+    ▼
+Waiter Delivers Food
+
+Customer does not cook.
+The Restaurant manages everything.
+
+Spring works similarly by managing objects.
+```
+
+---
+
+# ⭐ Advantages of Spring Framework
+
+* Lightweight
+* Loose Coupling
+* Easy Testing
+* Better Code Reusability
+* Easy Integration
+* Scalable Architecture
+* Modular Design
+* Simplified Enterprise Development
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Spring Framework?
+
+Spring is an open-source Java framework for building enterprise applications.
+
+---
+
+### 2. What is IoC?
+
+Inversion of Control is the process where Spring manages object creation.
+
+---
+
+### 3. What is Dependency Injection?
+
+A design pattern where dependencies are provided by Spring instead of being created manually.
+
+---
+
+### 4. What is a Spring Bean?
+
+A Bean is an object managed by the Spring IoC Container.
+
+---
+
+### 5. What are the types of Dependency Injection?
+
+* Constructor Injection
+* Setter Injection
+
+---
+
+### 6. What is the difference between BeanFactory and ApplicationContext?
+
+| BeanFactory  | ApplicationContext |
+| ------------ | ------------------ |
+| Basic        | Advanced           |
+| Lazy Loading | Eager Loading      |
+
+---
+
+### 7. What are Bean Scopes?
+
+* Singleton
+* Prototype
+* Request
+* Session
+* Application
+
+---
+
+### 8. What is @Autowired?
+
+It automatically injects dependencies.
+
+---
+
+### 9. What is @Component?
+
+It marks a class as a Spring-managed Bean.
+
+---
+
+### 10. Why is Spring popular?
+
+Because it simplifies Java enterprise development through IoC, DI, AOP, and modular architecture.
+
+---
+
+# 📝 Summary
+
+* Spring is a lightweight Java framework.
+* IoC transfers object creation to Spring.
+* DI injects dependencies automatically.
+* Beans are managed by the Spring Container.
+* ApplicationContext is the most commonly used container.
+* Spring supports modular and scalable application development.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Spring Boot Introduction**
+
+* What is Spring Boot?
+* Why Spring Boot?
+* Spring Boot Architecture
+* Spring Boot Features
+* Spring Initializr
+* Project Structure
+* Starter Dependencies
+* Auto Configuration
