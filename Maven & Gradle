@@ -1,0 +1,551 @@
+# Maven & Gradle ☕
+
+## 📖 What are Build Tools?
+
+A **Build Tool** is software that automates the process of:
+
+* Compiling source code
+* Managing dependencies
+* Running tests
+* Packaging applications
+* Deploying applications
+
+In Java, the two most popular build tools are:
+
+* 🔹 Maven
+* 🔹 Gradle
+
+---
+
+# 🎯 Why Do We Need Build Tools?
+
+Without Build Tools:
+
+❌ Manually download JAR files
+
+❌ Manually manage dependencies
+
+❌ Compile every file manually
+
+❌ Difficult project management
+
+With Build Tools:
+
+✅ Automatic dependency management
+
+✅ Easy project building
+
+✅ Faster development
+
+✅ Better project structure
+
+---
+
+# 🏗 Build Process
+
+```text
+Source Code
+      │
+      ▼
+Compile
+      │
+      ▼
+Run Tests
+      │
+      ▼
+Package (JAR/WAR)
+      │
+      ▼
+Deploy
+```
+
+---
+
+# 🚀 What is Maven?
+
+**Apache Maven** is a project management and build automation tool used primarily for Java projects.
+
+It follows the **Convention over Configuration** principle.
+
+---
+
+# ⭐ Features of Maven
+
+* Dependency Management
+* Project Build Automation
+* Standard Project Structure
+* Plugin Support
+* Easy Integration
+* Test Automation
+
+---
+
+# 📂 Maven Project Structure
+
+```text
+MyProject/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   └── resources/
+│   │
+│   └── test/
+│       ├── java/
+│       └── resources/
+│
+├── target/
+├── pom.xml
+└── README.md
+```
+
+---
+
+# 📄 What is pom.xml?
+
+**POM** stands for **Project Object Model**.
+
+It contains:
+
+* Project Information
+* Dependencies
+* Plugins
+* Build Configuration
+
+Example:
+
+```xml
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.anup</groupId>
+
+    <artifactId>springboot-app</artifactId>
+
+    <version>1.0.0</version>
+
+</project>
+```
+
+---
+
+# 📦 Maven Coordinates
+
+| Element    | Description       |
+| ---------- | ----------------- |
+| groupId    | Organization Name |
+| artifactId | Project Name      |
+| version    | Project Version   |
+
+Example:
+
+```text
+com.anup
+     │
+     ▼
+springboot-app
+     │
+     ▼
+1.0.0
+```
+
+---
+
+# 📚 Maven Dependencies
+
+Dependencies are external libraries required by a project.
+
+Example:
+
+```xml
+<dependencies>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+</dependencies>
+```
+
+---
+
+# 🔌 Maven Plugins
+
+Plugins perform specific tasks.
+
+Examples:
+
+* Compiler Plugin
+* Surefire Plugin
+* Jar Plugin
+* WAR Plugin
+
+Example:
+
+```xml
+<build>
+
+    <plugins>
+
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+        </plugin>
+
+    </plugins>
+
+</build>
+```
+
+---
+
+# ⚙ Maven Build Lifecycle
+
+```text
+Validate
+    │
+    ▼
+Compile
+    │
+    ▼
+Test
+    │
+    ▼
+Package
+    │
+    ▼
+Verify
+    │
+    ▼
+Install
+    │
+    ▼
+Deploy
+```
+
+---
+
+# 💻 Common Maven Commands
+
+## Compile Project
+
+```bash
+mvn compile
+```
+
+---
+
+## Run Tests
+
+```bash
+mvn test
+```
+
+---
+
+## Create JAR/WAR
+
+```bash
+mvn package
+```
+
+---
+
+## Install in Local Repository
+
+```bash
+mvn install
+```
+
+---
+
+## Clean Project
+
+```bash
+mvn clean
+```
+
+---
+
+## Run Spring Boot Project
+
+```bash
+mvn spring-boot:run
+```
+
+---
+
+# 🌐 Maven Repository
+
+Maven downloads dependencies from repositories.
+
+Types:
+
+* Local Repository
+* Central Repository
+* Remote Repository
+
+```text
+Developer
+    │
+    ▼
+Local Repository
+    │
+    ▼
+Maven Central Repository
+```
+
+---
+
+# 🚀 What is Gradle?
+
+**Gradle** is a modern build automation tool that combines the best features of Maven and Ant.
+
+It uses **Groovy DSL** or **Kotlin DSL** for configuration.
+
+---
+
+# ⭐ Features of Gradle
+
+* Faster Builds
+* Incremental Compilation
+* Flexible Configuration
+* Better Performance
+* Multi-Project Support
+
+---
+
+# 📂 Gradle Project Structure
+
+```text
+MyProject/
+│
+├── src/
+├── build.gradle
+├── settings.gradle
+└── build/
+```
+
+---
+
+# 📄 build.gradle Example
+
+```gradle
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+```
+
+---
+
+# ⚙ Gradle Build Lifecycle
+
+```text
+Initialization
+       │
+       ▼
+Configuration
+       │
+       ▼
+Execution
+```
+
+---
+
+# 💻 Common Gradle Commands
+
+## Build Project
+
+```bash
+gradle build
+```
+
+---
+
+## Run Tests
+
+```bash
+gradle test
+```
+
+---
+
+## Clean Project
+
+```bash
+gradle clean
+```
+
+---
+
+## Run Spring Boot Application
+
+```bash
+gradle bootRun
+```
+
+---
+
+# 📊 Maven vs Gradle
+
+| Feature               | Maven     | Gradle        |
+| --------------------- | --------- | ------------- |
+| Configuration         | XML       | Groovy/Kotlin |
+| Performance           | Good      | Faster        |
+| Learning Curve        | Easy      | Moderate      |
+| Dependency Management | Excellent | Excellent     |
+| Build Speed           | Slower    | Faster        |
+| Flexibility           | Less      | More          |
+
+---
+
+# 🌍 Real-Life Example
+
+```text
+Spring Boot Project
+
+Developer
+      │
+      ▼
+Maven / Gradle
+      │
+      ▼
+Download Dependencies
+      │
+      ▼
+Compile Code
+      │
+      ▼
+Run Tests
+      │
+      ▼
+Generate JAR File
+      │
+      ▼
+Deploy Application
+```
+
+---
+
+# ⭐ Advantages of Maven
+
+* Easy to Learn
+* Standard Project Structure
+* Large Community
+* Automatic Dependency Management
+
+---
+
+# ⭐ Advantages of Gradle
+
+* Faster Builds
+* Highly Flexible
+* Better Performance
+* Supports Large Projects
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Maven?
+
+Maven is a build automation and dependency management tool for Java projects.
+
+---
+
+### 2. What is Gradle?
+
+Gradle is a modern build tool that offers faster and more flexible builds.
+
+---
+
+### 3. What is pom.xml?
+
+It is the main configuration file used by Maven.
+
+---
+
+### 4. What is build.gradle?
+
+It is the main configuration file used by Gradle.
+
+---
+
+### 5. What are Maven Dependencies?
+
+External libraries required by a project.
+
+---
+
+### 6. What are Maven Plugins?
+
+Plugins perform tasks like compilation, testing, and packaging.
+
+---
+
+### 7. Difference between Maven and Gradle?
+
+| Maven            | Gradle        |
+| ---------------- | ------------- |
+| XML              | Groovy/Kotlin |
+| Slower           | Faster        |
+| Convention Based | Flexible      |
+
+---
+
+### 8. What is Maven Central Repository?
+
+A public repository that stores Java libraries and dependencies.
+
+---
+
+### 9. What is the Maven Build Lifecycle?
+
+* Validate
+* Compile
+* Test
+* Package
+* Verify
+* Install
+* Deploy
+
+---
+
+### 10. Which build tool is used by Spring Boot?
+
+Spring Boot supports both **Maven** and **Gradle**.
+
+---
+
+# 📝 Summary
+
+* Build tools automate software development tasks.
+* Maven uses **pom.xml**.
+* Gradle uses **build.gradle**.
+* Both manage dependencies and build applications.
+* Spring Boot projects commonly use Maven and Gradle.
+* Gradle is generally faster, while Maven is easier to learn.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Spring Framework Basics**
+
+* What is Spring?
+* Spring Architecture
+* IoC Container
+* Dependency Injection
+* Spring Beans
+* Bean Scopes
+* Spring Modules
+* Spring ConfigurationMaven & Gradle
