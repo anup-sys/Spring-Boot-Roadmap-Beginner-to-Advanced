@@ -1,0 +1,490 @@
+# Starter Dependencies 📦
+
+## 📖 What are Starter Dependencies?
+
+**Starter Dependencies** are pre-configured dependency packages provided by Spring Boot that simplify project setup.
+
+Instead of adding multiple libraries manually, you can add a single starter dependency, and Spring Boot automatically includes all required dependencies.
+
+For example:
+
+Instead of adding:
+
+* Spring MVC
+* Tomcat
+* Jackson
+* Validation API
+
+You only need:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+Spring Boot automatically downloads all required libraries.
+
+---
+
+# 🎯 Why Use Starter Dependencies?
+
+Without Starter Dependencies:
+
+❌ Add multiple JAR files manually
+
+❌ Manage dependency versions
+
+❌ Resolve compatibility issues
+
+❌ Complex configuration
+
+With Starter Dependencies:
+
+✅ Automatic Dependency Management
+
+✅ Faster Development
+
+✅ Less Configuration
+
+✅ Version Compatibility
+
+---
+
+# 🏗 How Starter Dependencies Work
+
+```text id="jlwm92"
+Developer
+     │
+     ▼
+Add Starter Dependency
+     │
+     ▼
+Spring Boot
+     │
+     ▼
+Downloads Required Libraries
+     │
+     ▼
+Application Ready
+```
+
+---
+
+# 📦 Common Spring Boot Starter Dependencies
+
+## 1️⃣ Spring Boot Starter Web
+
+Used for:
+
+* REST APIs
+* Web Applications
+* Spring MVC
+
+Dependency:
+
+```xml id="jlwm93"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+Includes:
+
+* Spring MVC
+* Embedded Tomcat
+* Jackson
+* Validation
+
+---
+
+## 2️⃣ Spring Boot Starter Data JPA
+
+Used for:
+
+* Database Operations
+* Hibernate
+* ORM
+* JPA
+
+Dependency:
+
+```xml id="jlwm94"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+```
+
+Includes:
+
+* Spring Data JPA
+* Hibernate
+* Transaction Management
+
+---
+
+## 3️⃣ Spring Boot Starter Security
+
+Used for:
+
+* Authentication
+* Authorization
+* Password Encryption
+
+Dependency:
+
+```xml id="jlwm95"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+Features:
+
+* Spring Security
+* Login Authentication
+* Role-Based Access Control
+
+---
+
+## 4️⃣ Spring Boot Starter Test
+
+Used for application testing.
+
+Dependency:
+
+```xml id="jlwm96"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+Includes:
+
+* JUnit 5
+* Mockito
+* Spring Test
+
+---
+
+## 5️⃣ Spring Boot Starter Thymeleaf
+
+Used for server-side web applications.
+
+```xml id="jlwm97"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+```
+
+---
+
+## 6️⃣ Spring Boot Starter JDBC
+
+Used for database connectivity using JDBC.
+
+```xml id="jlwm98"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency>
+```
+
+---
+
+## 7️⃣ Spring Boot Starter Validation
+
+Used for validating user input.
+
+```xml id="jlwm99"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+
+Example:
+
+```java id="jlwm100"
+@NotBlank
+private String name;
+```
+
+---
+
+## 8️⃣ Spring Boot Starter Mail
+
+Used for sending emails.
+
+```xml id="jlwm101"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-mail</artifactId>
+</dependency>
+```
+
+---
+
+## 9️⃣ Spring Boot Starter WebSocket
+
+Used for real-time applications.
+
+```xml id="jlwm102"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-websocket</artifactId>
+</dependency>
+```
+
+Applications:
+
+* Chat Applications
+* Live Notifications
+
+---
+
+## 🔟 Spring Boot Starter Actuator
+
+Used for monitoring and management.
+
+```xml id="jlwm103"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+Provides:
+
+* Health Checks
+* Metrics
+* Monitoring
+
+---
+
+# 🗄 Database Drivers
+
+## MySQL Driver
+
+```xml id="jlwm104"
+<dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+</dependency>
+```
+
+---
+
+## PostgreSQL Driver
+
+```xml id="jlwm105"
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+</dependency>
+```
+
+---
+
+## MongoDB Starter
+
+```xml id="jlwm106"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+```
+
+---
+
+# 📊 Most Used Spring Boot Starters
+
+| Starter                        | Purpose        |
+| ------------------------------ | -------------- |
+| spring-boot-starter-web        | REST API       |
+| spring-boot-starter-data-jpa   | Database       |
+| spring-boot-starter-security   | Security       |
+| spring-boot-starter-test       | Testing        |
+| spring-boot-starter-validation | Validation     |
+| spring-boot-starter-thymeleaf  | Web Pages      |
+| spring-boot-starter-actuator   | Monitoring     |
+| spring-boot-starter-mail       | Email          |
+| spring-boot-starter-websocket  | Real-Time Apps |
+
+---
+
+# 📂 Example pom.xml
+
+```xml id="jlwm107"
+<dependencies>
+
+    <!-- Web -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- JPA -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- MySQL -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+    </dependency>
+
+</dependencies>
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="jlwm108"
+Building a Hospital Management System
+
+Need REST API
+        │
+        ▼
+spring-boot-starter-web
+
+Need Database
+        │
+        ▼
+spring-boot-starter-data-jpa
+
+Need Security
+        │
+        ▼
+spring-boot-starter-security
+
+Need Testing
+        │
+        ▼
+spring-boot-starter-test
+```
+
+---
+
+# ⭐ Advantages of Starter Dependencies
+
+* Easy Setup
+* Automatic Version Management
+* Less Boilerplate Code
+* Faster Development
+* Production Ready
+* Better Compatibility
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What are Starter Dependencies?
+
+Pre-configured dependency packages that simplify Spring Boot project setup.
+
+---
+
+### 2. What is spring-boot-starter-web?
+
+A starter used for building REST APIs and web applications.
+
+---
+
+### 3. What is spring-boot-starter-data-jpa?
+
+A starter used for database operations using JPA and Hibernate.
+
+---
+
+### 4. What is spring-boot-starter-security?
+
+A starter used for authentication and authorization.
+
+---
+
+### 5. What is spring-boot-starter-test?
+
+A starter used for testing Spring Boot applications.
+
+---
+
+### 6. What is the advantage of Starter Dependencies?
+
+They automatically manage required libraries and compatible versions.
+
+---
+
+### 7. Which starter is used for REST APIs?
+
+```text id="jlwm109"
+spring-boot-starter-web
+```
+
+---
+
+### 8. Which starter is used for database integration?
+
+```text id="jlwm110"
+spring-boot-starter-data-jpa
+```
+
+---
+
+### 9. Which starter is used for validation?
+
+```text id="jlwm111"
+spring-boot-starter-validation
+```
+
+---
+
+### 10. Can multiple starter dependencies be used together?
+
+Yes. A Spring Boot project can use multiple starter dependencies.
+
+---
+
+# 📝 Summary
+
+* Starter Dependencies simplify Spring Boot development.
+* They automatically manage required libraries.
+* The most commonly used starters are:
+
+  * Web
+  * Data JPA
+  * Security
+  * Test
+  * Validation
+  * Thymeleaf
+  * Actuator
+* Starter dependencies reduce configuration and speed up development.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Auto Configuration**
+
+* What is Auto Configuration?
+* @EnableAutoConfiguration
+* How Auto Configuration Works
+* Conditional Annotations
+* Spring Boot Magic Behind the Scenes
+* Custom Auto Configuration
