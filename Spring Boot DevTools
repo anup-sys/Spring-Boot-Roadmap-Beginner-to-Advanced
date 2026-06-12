@@ -1,0 +1,433 @@
+# Spring Boot DevTools 🛠️
+
+## 📖 What is Spring Boot DevTools?
+
+**Spring Boot DevTools (Developer Tools)** is a module that improves the development experience by providing features like:
+
+* Automatic Restart
+* Live Reload
+* Faster Development
+* Development-time Configuration
+
+It helps developers avoid manually restarting the application after every code change.
+
+---
+
+# 🎯 Why Use DevTools?
+
+Without DevTools:
+
+❌ Modify Code
+
+❌ Stop Application
+
+❌ Restart Application
+
+❌ Wait for Server Startup
+
+With DevTools:
+
+✅ Save Code
+
+✅ Application Restarts Automatically
+
+✅ Browser Refreshes Automatically
+
+✅ Faster Development
+
+---
+
+# 🌟 Features of Spring Boot DevTools
+
+## 1. Automatic Restart
+
+Whenever you modify and save your code, Spring Boot automatically restarts the application.
+
+```text id="6ucjtm"
+Modify Code
+      │
+      ▼
+Save File
+      │
+      ▼
+DevTools Detects Change
+      │
+      ▼
+Application Restarts
+```
+
+---
+
+## 2. Live Reload
+
+Automatically refreshes the browser when files change.
+
+Example:
+
+* Modify HTML
+* Save File
+* Browser Reloads Automatically
+
+---
+
+## 3. Faster Startup
+
+DevTools uses two classloaders:
+
+* Base ClassLoader
+* Restart ClassLoader
+
+This makes restart much faster.
+
+---
+
+## 4. Development-Time Properties
+
+DevTools automatically applies useful development settings.
+
+Examples:
+
+* Disable Template Cache
+* Enable Debugging
+* Faster Development
+
+---
+
+# 📦 Adding DevTools Dependency
+
+## Maven
+
+```xml id="djlwm1"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>runtime</scope>
+    <optional>true</optional>
+</dependency>
+```
+
+---
+
+## Gradle
+
+```gradle id="djlwm2"
+dependencies {
+    developmentOnly(
+        "org.springframework.boot:spring-boot-devtools"
+    )
+}
+```
+
+---
+
+# 🚀 How DevTools Works
+
+```text id="djlwm3"
+Run Application
+        │
+        ▼
+Modify Source Code
+        │
+        ▼
+Save File
+        │
+        ▼
+DevTools Detects Change
+        │
+        ▼
+Automatic Restart
+        │
+        ▼
+Application Ready
+```
+
+---
+
+# ⚙ Live Reload
+
+DevTools includes a LiveReload server.
+
+Install a browser extension:
+
+* Chrome LiveReload Extension
+* Firefox LiveReload Extension
+
+Then:
+
+```text id="djlwm4"
+Save HTML File
+        │
+        ▼
+Browser Reloads Automatically
+```
+
+---
+
+# 📄 application.properties
+
+Enable DevTools Restart
+
+```properties id="djlwm5"
+spring.devtools.restart.enabled=true
+```
+
+---
+
+Disable Restart
+
+```properties id="djlwm6"
+spring.devtools.restart.enabled=false
+```
+
+---
+
+Enable Live Reload
+
+```properties id="djlwm7"
+spring.devtools.livereload.enabled=true
+```
+
+---
+
+# 📁 Files Monitored by DevTools
+
+DevTools watches changes in:
+
+```text id="djlwm8"
+src/main/java
+src/main/resources
+templates
+static
+```
+
+If changes occur, the application restarts automatically.
+
+---
+
+# 🏗 Restart vs Reload
+
+## Restart
+
+```text id="djlwm9"
+Modify Java File
+        │
+        ▼
+Application Restarts
+```
+
+---
+
+## Live Reload
+
+```text id="djlwm10"
+Modify HTML/CSS File
+         │
+         ▼
+Browser Refreshes
+```
+
+---
+
+# 📊 DevTools vs Manual Restart
+
+| Feature               | Manual Restart | DevTools |
+| --------------------- | -------------- | -------- |
+| Restart Automatically | ❌              | ✅        |
+| Live Reload           | ❌              | ✅        |
+| Faster Development    | ❌              | ✅        |
+| Browser Refresh       | ❌              | ✅        |
+
+---
+
+# 💻 Example REST API
+
+```java id="djlwm11"
+@RestController
+public class HomeController {
+
+    @GetMapping("/")
+    public String home() {
+        return "Spring Boot DevTools";
+    }
+
+}
+```
+
+Change:
+
+```java id="djlwm12"
+return "Welcome to DevTools";
+```
+
+Save the file.
+
+DevTools automatically restarts the application.
+
+---
+
+# 🔍 DevTools Startup Log
+
+```text id="djlwm13"
+Restarting due to changed files
+
+Restart completed
+
+Started DemoApplication
+```
+
+This indicates DevTools detected file changes.
+
+---
+
+# 🚫 DevTools in Production
+
+DevTools should only be used during development.
+
+It is automatically disabled in packaged production applications.
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="djlwm14"
+Traditional Writing
+
+Write Document
+       │
+       ▼
+Save
+       │
+       ▼
+Close
+       │
+       ▼
+Open Again
+
+--------------------------------
+
+Auto Save
+
+Write
+   │
+   ▼
+Save Automatically
+
+Spring Boot DevTools works similarly.
+```
+
+---
+
+# ⭐ Advantages of DevTools
+
+* Automatic Restart
+* Live Reload
+* Faster Development
+* Reduced Development Time
+* Better Productivity
+* Easy Configuration
+
+---
+
+# ❌ Limitations
+
+* Not Recommended for Production
+* Requires IDE Auto Build
+* Browser Extension Needed for Live Reload
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Spring Boot DevTools?
+
+A module that improves development productivity by providing automatic restart and live reload.
+
+---
+
+### 2. What are the main features of DevTools?
+
+* Automatic Restart
+* Live Reload
+* Faster Startup
+
+---
+
+### 3. Which dependency is used for DevTools?
+
+```xml id="djlwm15"
+spring-boot-devtools
+```
+
+---
+
+### 4. Does DevTools work in production?
+
+No. It is intended only for development.
+
+---
+
+### 5. What is Live Reload?
+
+A feature that automatically refreshes the browser after file changes.
+
+---
+
+### 6. What is Automatic Restart?
+
+A feature that restarts the application after code changes.
+
+---
+
+### 7. Can DevTools restart be disabled?
+
+Yes.
+
+```properties id="djlwm16"
+spring.devtools.restart.enabled=false
+```
+
+---
+
+### 8. Which files are monitored by DevTools?
+
+* Java Files
+* Resource Files
+* HTML Templates
+* Static Resources
+
+---
+
+### 9. Does DevTools improve startup time?
+
+Yes, by using optimized classloaders.
+
+---
+
+### 10. Why is DevTools useful?
+
+It reduces development time and improves developer productivity.
+
+---
+
+# 📝 Summary
+
+* Spring Boot DevTools is a development utility.
+* It provides Automatic Restart and Live Reload.
+* It improves developer productivity.
+* DevTools should not be used in production.
+* It monitors source code and resource changes.
+* It significantly speeds up the development cycle.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Spring Boot Profiles**
+
+* What are Profiles?
+* application.properties
+* application-dev.properties
+* application-prod.properties
+* @Profile Annotation
+* Active Profiles
+* Environment-Specific Configuration
