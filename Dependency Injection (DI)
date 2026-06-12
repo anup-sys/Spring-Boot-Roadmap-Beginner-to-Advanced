@@ -1,0 +1,578 @@
+# Dependency Injection (DI) 💉
+
+## 📖 What is Dependency Injection (DI)?
+
+**Dependency Injection (DI)** is a design pattern in which an object receives its dependencies from an external source instead of creating them itself.
+
+In Spring Framework, the **Spring IoC Container** creates and injects the required objects (Beans).
+
+In simple words:
+
+> **Don't create objects manually. Let Spring create and manage them for you.**
+
+---
+
+# 🎯 Why Dependency Injection?
+
+Without DI:
+
+❌ Tight Coupling
+
+❌ Difficult Testing
+
+❌ Hard to Maintain
+
+❌ Difficult to Replace Components
+
+With DI:
+
+✅ Loose Coupling
+
+✅ Easy Testing
+
+✅ Better Code Reusability
+
+✅ Easy Maintenance
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="c6d8qv"
+Car
+ │
+ ├── Engine
+ └── Battery
+```
+
+Without DI:
+
+Car creates its own Engine.
+
+```text id="tnjlwm"
+Car
+ │
+ ▼
+Creates Engine
+```
+
+With DI:
+
+Spring provides the Engine.
+
+```text id="jlwm1"
+Spring Container
+        │
+        ▼
+Creates Engine
+        │
+        ▼
+Injects into Car
+```
+
+---
+
+# 🏗 Without Dependency Injection
+
+```java id="jlwm2"
+class Engine {
+
+    void start() {
+        System.out.println("Engine Started");
+    }
+
+}
+
+class Car {
+
+    private Engine engine =
+            new Engine();
+
+    void drive() {
+        engine.start();
+        System.out.println("Car Running");
+    }
+
+}
+```
+
+Problem:
+
+* Tight Coupling
+* Difficult to modify
+* Difficult to test
+
+---
+
+# 🏗 With Dependency Injection
+
+```java id="jlwm3"
+class Engine {
+
+    void start() {
+        System.out.println("Engine Started");
+    }
+
+}
+
+class Car {
+
+    private Engine engine;
+
+    Car(Engine engine) {
+        this.engine = engine;
+    }
+
+}
+```
+
+Spring provides the Engine object.
+
+---
+
+# 🌟 How DI Works
+
+```text id="jlwm4"
+Application Starts
+        │
+        ▼
+Spring Container
+        │
+        ▼
+Create Beans
+        │
+        ▼
+Inject Dependencies
+        │
+        ▼
+Application Ready
+```
+
+---
+
+# 🏷 Types of Dependency Injection
+
+Spring supports three types:
+
+## 1️⃣ Constructor Injection
+
+Dependencies are injected through the constructor.
+
+```java id="jlwm5"
+@Component
+class Engine {
+
+}
+
+@Component
+class Car {
+
+    private final Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+}
+```
+
+### Advantages
+
+* Immutable Objects
+* Easy Testing
+* Recommended by Spring
+
+---
+
+## 2️⃣ Setter Injection
+
+Dependencies are injected using setter methods.
+
+```java id="jlwm6"
+@Component
+class Car {
+
+    private Engine engine;
+
+    @Autowired
+    public void setEngine(
+            Engine engine) {
+
+        this.engine = engine;
+
+    }
+
+}
+```
+
+### Advantages
+
+* Optional Dependencies
+* Flexible Configuration
+
+---
+
+## 3️⃣ Field Injection
+
+Dependencies are injected directly into fields.
+
+```java id="jlwm7"
+@Component
+class Car {
+
+    @Autowired
+    private Engine engine;
+
+}
+```
+
+### Disadvantages
+
+* Difficult to Test
+* Hidden Dependencies
+* Not Recommended
+
+---
+
+# 📊 Constructor vs Setter vs Field Injection
+
+| Feature             | Constructor | Setter | Field |
+| ------------------- | ----------- | ------ | ----- |
+| Recommended         | ✅           | ⚠️     | ❌     |
+| Immutable           | ✅           | ❌      | ❌     |
+| Easy Testing        | ✅           | ✅      | ❌     |
+| Optional Dependency | ❌           | ✅      | ❌     |
+
+---
+
+# 🏷 @Autowired Annotation
+
+`@Autowired` tells Spring to inject the required dependency automatically.
+
+Example:
+
+```java id="jlwm8"
+@Component
+class StudentService {
+
+}
+
+@Component
+class StudentController {
+
+    @Autowired
+    private StudentService service;
+
+}
+```
+
+Spring automatically creates and injects `StudentService`.
+
+---
+
+# 💻 Constructor Injection with @Autowired
+
+In Spring Boot 4.x and modern Spring Boot versions, if there is only one constructor, `@Autowired` is optional.
+
+```java id="jlwm9"
+@Component
+class StudentController {
+
+    private final StudentService service;
+
+    public StudentController(
+            StudentService service) {
+
+        this.service = service;
+
+    }
+
+}
+```
+
+---
+
+# 🏷 @Component Annotation
+
+Marks a class as a Spring Bean.
+
+```java id="jlwm10"
+@Component
+class Engine {
+
+}
+```
+
+Spring manages this object automatically.
+
+---
+
+# 🏷 Other Stereotype Annotations
+
+## @Service
+
+Business Logic Layer
+
+```java id="jlwm11"
+@Service
+public class StudentService {
+
+}
+```
+
+---
+
+## @Repository
+
+Database Layer
+
+```java id="jlwm12"
+@Repository
+public class StudentRepository {
+
+}
+```
+
+---
+
+## @Controller
+
+MVC Controller
+
+```java id="jlwm13"
+@Controller
+public class HomeController {
+
+}
+```
+
+---
+
+## @RestController
+
+REST API Controller
+
+```java id="jlwm14"
+@RestController
+public class StudentController {
+
+}
+```
+
+---
+
+# 🏗 Spring IoC Container
+
+The IoC Container manages:
+
+* Bean Creation
+* Bean Lifecycle
+* Dependency Injection
+
+```text id="jlwm15"
+Spring Container
+        │
+        ├── Create Bean
+        ├── Manage Bean
+        └── Inject Bean
+```
+
+---
+
+# 🔄 Bean Creation Process
+
+```text id="jlwm16"
+@Component
+      │
+      ▼
+Component Scan
+      │
+      ▼
+Bean Created
+      │
+      ▼
+@Autowired
+      │
+      ▼
+Dependency Injected
+```
+
+---
+
+# 📦 Qualifier Annotation
+
+When multiple beans of the same type exist, use `@Qualifier`.
+
+```java id="jlwm17"
+@Component
+class PetrolEngine {
+
+}
+
+@Component
+class DieselEngine {
+
+}
+
+@Component
+class Car {
+
+    @Autowired
+    @Qualifier("dieselEngine")
+    private Engine engine;
+
+}
+```
+
+---
+
+# 🏷 @Primary Annotation
+
+Marks a bean as the default choice.
+
+```java id="jlwm18"
+@Component
+@Primary
+class DieselEngine {
+
+}
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="jlwm19"
+Restaurant
+
+Customer
+     │
+     ▼
+Orders Food
+     │
+     ▼
+Chef Prepares Food
+     │
+     ▼
+Waiter Delivers Food
+
+Customer does not prepare the food.
+
+Spring works similarly by providing dependencies automatically.
+```
+
+---
+
+# ⭐ Advantages of Dependency Injection
+
+* Loose Coupling
+* Better Code Reusability
+* Easier Unit Testing
+* Easy Maintenance
+* Flexible Architecture
+* Improved Readability
+
+---
+
+# ❌ Disadvantages
+
+* Learning Curve
+* More Abstraction
+* Difficult Debugging for Beginners
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Dependency Injection?
+
+Dependency Injection is a design pattern where Spring provides required objects instead of creating them manually.
+
+---
+
+### 2. What are the types of Dependency Injection?
+
+* Constructor Injection
+* Setter Injection
+* Field Injection
+
+---
+
+### 3. Which type of DI is recommended?
+
+✅ Constructor Injection
+
+---
+
+### 4. What is @Autowired?
+
+It automatically injects dependencies.
+
+---
+
+### 5. What is the difference between IoC and DI?
+
+| IoC                      | DI                   |
+| ------------------------ | -------------------- |
+| Design Principle         | Design Pattern       |
+| Controls Object Creation | Injects Dependencies |
+
+---
+
+### 6. What is @Qualifier?
+
+Used to select a specific bean when multiple beans exist.
+
+---
+
+### 7. What is @Primary?
+
+Marks a bean as the default bean.
+
+---
+
+### 8. What is the role of Spring Container?
+
+It creates, manages, and injects Spring Beans.
+
+---
+
+### 9. Why is Constructor Injection preferred?
+
+Because it creates immutable objects and improves testability.
+
+---
+
+### 10. What is Tight Coupling?
+
+When one class directly creates and depends on another class.
+
+---
+
+# 📝 Summary
+
+* Dependency Injection (DI) is a core feature of Spring.
+* Spring IoC Container manages object creation.
+* Types of DI:
+
+  * Constructor Injection
+  * Setter Injection
+  * Field Injection
+* Constructor Injection is the recommended approach.
+* `@Autowired` injects dependencies automatically.
+* `@Qualifier` and `@Primary` help manage multiple beans.
+* DI promotes loose coupling and maintainable code.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Inversion of Control (IoC)**
+
+* What is IoC?
+* IoC Container
+* BeanFactory
+* ApplicationContext
+* Bean Lifecycle
+* Spring Container
+* IoC vs DI
