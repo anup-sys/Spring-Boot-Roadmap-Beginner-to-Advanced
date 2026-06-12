@@ -1,0 +1,505 @@
+# Collections Framework in Java ☕
+
+## 📖 What is Collections Framework?
+
+The **Java Collections Framework (JCF)** is a set of classes and interfaces that provide a standard way to store, manage, and manipulate groups of objects.
+
+It provides ready-made data structures and algorithms, making programming easier and more efficient.
+
+---
+
+# 🎯 Why Use Collections?
+
+Without Collections:
+
+* Fixed-size arrays
+* Difficult insertion and deletion
+* Manual memory management
+
+With Collections:
+
+* Dynamic size
+* Easy data manipulation
+* Built-in sorting and searching
+* Better performance
+
+---
+
+# 🏗 Java Collections Hierarchy
+
+```text id="yv6qrz"
+                Iterable
+                    │
+               Collection
+        ┌──────────┼──────────┐
+        │          │          │
+       List       Set       Queue
+        │          │          │
+   ┌────┼───┐   ┌──┼───┐   ┌──┼────┐
+   │    │   │   │  │   │   │       │
+Array Linked Vector Hash Tree Priority
+List  List         Set Set   Queue
+                    │
+                LinkedHashSet
+
+                Map
+                 │
+         ┌───────┼────────┐
+         │       │        │
+      HashMap TreeMap LinkedHashMap
+```
+
+---
+
+# 📚 Collection Interfaces
+
+| Interface | Description                           |
+| --------- | ------------------------------------- |
+| List      | Ordered collection, allows duplicates |
+| Set       | Unordered collection, no duplicates   |
+| Queue     | Stores elements for processing        |
+| Map       | Stores key-value pairs                |
+
+---
+
+# 1️⃣ List Interface
+
+A List maintains insertion order and allows duplicate elements.
+
+## Common Implementations
+
+* ArrayList
+* LinkedList
+* Vector
+* Stack
+
+---
+
+## ArrayList
+
+### Features
+
+* Dynamic Array
+* Fast Random Access
+* Allows Duplicates
+* Maintains Order
+
+### Example
+
+```java id="vkl3kg"
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add("Java");
+        list.add("Spring Boot");
+        list.add("Java");
+
+        System.out.println(list);
+    }
+}
+```
+
+### Output
+
+```text id="0u9w92"
+[Java, Spring Boot, Java]
+```
+
+---
+
+## LinkedList
+
+### Features
+
+* Doubly Linked List
+* Fast Insertion and Deletion
+* Allows Duplicates
+
+```java id="6dr0iq"
+LinkedList<Integer> list = new LinkedList<>();
+
+list.add(10);
+list.add(20);
+
+System.out.println(list);
+```
+
+---
+
+## Vector
+
+* Dynamic Array
+* Thread Safe
+* Slower than ArrayList
+
+```java id="5ez7mq"
+Vector<String> vector = new Vector<>();
+
+vector.add("Apple");
+vector.add("Banana");
+```
+
+---
+
+## Stack
+
+Works on **LIFO (Last In First Out)**.
+
+```java id="i7fjy2"
+Stack<Integer> stack = new Stack<>();
+
+stack.push(10);
+stack.push(20);
+
+System.out.println(stack.pop());
+```
+
+### Output
+
+```text id="ikzmkc"
+20
+```
+
+---
+
+# 2️⃣ Set Interface
+
+A Set does not allow duplicate elements.
+
+---
+
+## HashSet
+
+### Features
+
+* No Duplicates
+* Unordered
+* Fast Performance
+
+```java id="mk92wb"
+HashSet<String> set = new HashSet<>();
+
+set.add("Java");
+set.add("Python");
+set.add("Java");
+
+System.out.println(set);
+```
+
+### Output
+
+```text id="lhl7j8"
+[Java, Python]
+```
+
+---
+
+## LinkedHashSet
+
+* No Duplicates
+* Maintains Insertion Order
+
+```java id="by5wdl"
+LinkedHashSet<Integer> set = new LinkedHashSet<>();
+
+set.add(100);
+set.add(200);
+
+System.out.println(set);
+```
+
+---
+
+## TreeSet
+
+* Sorted Order
+* No Duplicates
+
+```java id="m0hzr2"
+TreeSet<Integer> set = new TreeSet<>();
+
+set.add(30);
+set.add(10);
+set.add(20);
+
+System.out.println(set);
+```
+
+### Output
+
+```text id="4x1jzc"
+[10, 20, 30]
+```
+
+---
+
+# 3️⃣ Queue Interface
+
+Queue follows **FIFO (First In First Out)**.
+
+---
+
+## PriorityQueue
+
+Stores elements according to priority.
+
+```java id="t0m7h6"
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+pq.add(30);
+pq.add(10);
+pq.add(20);
+
+System.out.println(pq.poll());
+```
+
+### Output
+
+```text id="22d2ch"
+10
+```
+
+---
+
+# 4️⃣ Map Interface
+
+Map stores data as **Key-Value pairs**.
+
+Keys must be unique.
+
+---
+
+## HashMap
+
+* Unordered
+* Fast Access
+* Allows One Null Key
+
+```java id="zt5g4r"
+HashMap<Integer, String> map = new HashMap<>();
+
+map.put(1, "Java");
+map.put(2, "Spring");
+
+System.out.println(map);
+```
+
+---
+
+## LinkedHashMap
+
+* Maintains Insertion Order
+
+```java id="3fdkfa"
+LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+```
+
+---
+
+## TreeMap
+
+* Sorted by Keys
+
+```java id="g9v4u0"
+TreeMap<Integer, String> map = new TreeMap<>();
+```
+
+---
+
+# 🔄 Iterating Collections
+
+## Enhanced For Loop
+
+```java id="z3vjg8"
+ArrayList<String> list = new ArrayList<>();
+
+list.add("Java");
+list.add("Go");
+
+for(String s : list){
+    System.out.println(s);
+}
+```
+
+---
+
+## Iterator
+
+```java id="5z84i9"
+Iterator<String> itr = list.iterator();
+
+while(itr.hasNext()){
+    System.out.println(itr.next());
+}
+```
+
+---
+
+# ⚡ Collections Utility Class
+
+## Sorting
+
+```java id="gr5i8w"
+Collections.sort(list);
+```
+
+---
+
+## Reverse
+
+```java id="nqk6c4"
+Collections.reverse(list);
+```
+
+---
+
+## Maximum Element
+
+```java id="y7o6je"
+Collections.max(list);
+```
+
+---
+
+## Minimum Element
+
+```java id="n7e2vd"
+Collections.min(list);
+```
+
+---
+
+# 📊 ArrayList vs LinkedList
+
+| Feature        | ArrayList     | LinkedList         |
+| -------------- | ------------- | ------------------ |
+| Data Structure | Dynamic Array | Doubly Linked List |
+| Access Speed   | Fast          | Slow               |
+| Insert/Delete  | Slow          | Fast               |
+| Memory         | Less          | More               |
+
+---
+
+# 📊 HashSet vs TreeSet
+
+| Feature     | HashSet     | TreeSet     |
+| ----------- | ----------- | ----------- |
+| Order       | No          | Sorted      |
+| Duplicate   | Not Allowed | Not Allowed |
+| Performance | Faster      | Slower      |
+
+---
+
+# 📊 HashMap vs TreeMap
+
+| Feature     | HashMap     | TreeMap     |
+| ----------- | ----------- | ----------- |
+| Ordering    | No          | Sorted      |
+| Null Key    | One Allowed | Not Allowed |
+| Performance | Faster      | Slower      |
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="m0r8pi"
+College Management System
+
+Students -> ArrayList
+
+Unique Courses -> HashSet
+
+Attendance Queue -> Queue
+
+Student Details -> HashMap
+```
+
+---
+
+# 🎯 Advantages of Collections Framework
+
+* Dynamic Memory Allocation
+* Reusable Data Structures
+* Built-in Algorithms
+* Better Performance
+* Easy Data Manipulation
+* Generic Support
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Java Collections Framework?
+
+A framework that provides classes and interfaces for storing and manipulating groups of objects.
+
+---
+
+### 2. Difference between List and Set?
+
+| List              | Set           |
+| ----------------- | ------------- |
+| Allows Duplicates | No Duplicates |
+| Ordered           | Unordered     |
+
+---
+
+### 3. Difference between ArrayList and LinkedList?
+
+ArrayList uses a dynamic array, while LinkedList uses a doubly linked list.
+
+---
+
+### 4. Difference between HashMap and Hashtable?
+
+| HashMap         | Hashtable   |
+| --------------- | ----------- |
+| Not Thread Safe | Thread Safe |
+| Allows Null Key | No Null Key |
+
+---
+
+### 5. Difference between Comparable and Comparator?
+
+* Comparable → Natural Sorting
+* Comparator → Custom Sorting
+
+---
+
+# 📝 Summary
+
+* Collections Framework provides reusable data structures.
+* Main Interfaces:
+
+  * List
+  * Set
+  * Queue
+  * Map
+* Popular Classes:
+
+  * ArrayList
+  * LinkedList
+  * HashSet
+  * TreeSet
+  * HashMap
+  * TreeMap
+  * PriorityQueue
+* Collections Utility class provides sorting and searching methods.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Exception Handling in Java**
+
+* Types of Exceptions
+* try-catch
+* finally
+* throw
+* throws
+* Custom Exceptions
