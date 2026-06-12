@@ -1,0 +1,527 @@
+# Inversion of Control (IoC) 🔄
+
+## 📖 What is Inversion of Control (IoC)?
+
+**Inversion of Control (IoC)** is a design principle where the control of object creation and dependency management is transferred from the programmer to the Spring Framework.
+
+In simple words:
+
+> **Instead of creating objects yourself, Spring creates and manages them for you.**
+
+IoC is one of the core concepts of the Spring Framework.
+
+---
+
+# 🎯 Why IoC?
+
+Without IoC:
+
+❌ Manual Object Creation
+
+❌ Tight Coupling
+
+❌ Difficult Maintenance
+
+❌ Difficult Unit Testing
+
+With IoC:
+
+✅ Automatic Object Creation
+
+✅ Loose Coupling
+
+✅ Easy Testing
+
+✅ Better Code Reusability
+
+---
+
+# 🌍 Real-Life Example
+
+## Without IoC
+
+Imagine a customer wants food.
+
+```text id="wjlwm1"
+Customer
+    │
+    ▼
+Goes to Kitchen
+    │
+    ▼
+Cooks Food
+```
+
+The customer does everything.
+
+---
+
+## With IoC
+
+```text id="wjlwm2"
+Customer
+    │
+    ▼
+Restaurant
+    │
+    ▼
+Chef Prepares Food
+    │
+    ▼
+Waiter Serves Food
+```
+
+The restaurant manages everything.
+
+Spring works in the same way.
+
+---
+
+# 🏗 Without IoC
+
+```java id="wjlwm3"
+class Engine {
+
+}
+
+class Car {
+
+    private Engine engine =
+            new Engine();
+
+}
+```
+
+Problems:
+
+* Tight Coupling
+* Hard to Replace Engine
+* Difficult Testing
+
+---
+
+# 🏗 With IoC
+
+```java id="wjlwm4"
+@Component
+class Engine {
+
+}
+
+@Component
+class Car {
+
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+}
+```
+
+Spring automatically creates and injects the Engine object.
+
+---
+
+# 🌟 How IoC Works
+
+```text id="wjlwm5"
+Application Starts
+        │
+        ▼
+Spring IoC Container
+        │
+        ▼
+Create Beans
+        │
+        ▼
+Manage Beans
+        │
+        ▼
+Inject Dependencies
+        │
+        ▼
+Application Ready
+```
+
+---
+
+# 🏷 What is IoC Container?
+
+The **IoC Container** is the heart of the Spring Framework.
+
+It is responsible for:
+
+* Creating Beans
+* Managing Beans
+* Injecting Dependencies
+* Controlling Bean Lifecycle
+
+---
+
+# 📦 Types of IoC Container
+
+Spring provides two IoC containers:
+
+## 1️⃣ BeanFactory
+
+* Basic IoC Container
+* Lightweight
+* Lazy Initialization
+* Less Common
+
+```text id="wjlwm6"
+BeanFactory
+      │
+      ▼
+Create Bean When Needed
+```
+
+---
+
+## 2️⃣ ApplicationContext
+
+* Advanced IoC Container
+* Most Common
+* Eager Initialization
+* Enterprise Features
+
+```text id="wjlwm7"
+ApplicationContext
+         │
+         ▼
+Creates Beans at Startup
+```
+
+---
+
+# 📊 BeanFactory vs ApplicationContext
+
+| BeanFactory     | ApplicationContext |
+| --------------- | ------------------ |
+| Basic Container | Advanced Container |
+| Lazy Loading    | Eager Loading      |
+| Less Features   | More Features      |
+| Rarely Used     | Commonly Used      |
+
+---
+
+# 🫘 What is a Bean?
+
+A **Bean** is an object managed by the Spring IoC Container.
+
+Example:
+
+```java id="wjlwm8"
+@Component
+public class Student {
+
+}
+```
+
+Spring automatically creates and manages this object.
+
+---
+
+# 🏷 Bean Creation
+
+```text id="wjlwm9"
+@Component
+      │
+      ▼
+Component Scan
+      │
+      ▼
+Bean Created
+      │
+      ▼
+Stored in IoC Container
+```
+
+---
+
+# 💉 IoC and Dependency Injection
+
+IoC and DI work together.
+
+```text id="wjlwm10"
+IoC
+ │
+ ▼
+Creates Object
+ │
+ ▼
+Dependency Injection
+ │
+ ▼
+Injects Object
+```
+
+---
+
+# 🔄 Bean Lifecycle
+
+```text id="wjlwm11"
+Bean Definition
+       │
+       ▼
+Bean Creation
+       │
+       ▼
+Dependency Injection
+       │
+       ▼
+Initialization
+       │
+       ▼
+Bean Ready
+       │
+       ▼
+Destroy
+```
+
+---
+
+# 🏷 Important Spring Annotations
+
+## @Component
+
+Creates a Spring Bean.
+
+```java id="wjlwm12"
+@Component
+class Student {
+
+}
+```
+
+---
+
+## @Service
+
+Business Logic Layer.
+
+```java id="wjlwm13"
+@Service
+class StudentService {
+
+}
+```
+
+---
+
+## @Repository
+
+Database Layer.
+
+```java id="wjlwm14"
+@Repository
+class StudentRepository {
+
+}
+```
+
+---
+
+## @Controller
+
+MVC Controller.
+
+```java id="w’wini15"
+@Controller
+class HomeController {
+
+}
+```
+
+---
+
+## @RestController
+
+REST API Controller.
+
+```java id="w’wini16"
+@RestController
+class StudentController {
+
+}
+```
+
+---
+
+# 💻 ApplicationContext Example
+
+```java id="w’wini17"
+ApplicationContext context =
+new AnnotationConfigApplicationContext(
+        AppConfig.class
+);
+
+Student student =
+context.getBean(Student.class);
+```
+
+The IoC Container creates and returns the Student object.
+
+---
+
+# 🏗 IoC Architecture
+
+```text id="w’wini18"
+Application
+      │
+      ▼
+Spring Container
+      │
+      ├── Create Beans
+      ├── Manage Beans
+      └── Inject Dependencies
+      │
+      ▼
+Application Objects
+```
+
+---
+
+# 📊 IoC vs Dependency Injection
+
+| IoC                      | DI                    |
+| ------------------------ | --------------------- |
+| Design Principle         | Design Pattern        |
+| Controls Object Creation | Injects Dependencies  |
+| Managed by Spring        | Implemented using IoC |
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="w’wini19"
+Hospital
+
+Patient
+    │
+    ▼
+Reception
+    │
+    ▼
+Doctor
+    │
+    ▼
+Medicine
+
+Patient does not manage the entire system.
+
+The hospital manages everything.
+
+Spring IoC works similarly.
+```
+
+---
+
+# ⭐ Advantages of IoC
+
+* Loose Coupling
+* Better Maintainability
+* Easy Unit Testing
+* Better Code Reusability
+* Modular Design
+* Easy Dependency Management
+
+---
+
+# ❌ Disadvantages
+
+* Initial Learning Curve
+* More Abstraction
+* Debugging Can Be Difficult for Beginners
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is IoC?
+
+IoC is a design principle where Spring manages object creation and lifecycle.
+
+---
+
+### 2. What is an IoC Container?
+
+An IoC Container creates, manages, and injects Spring Beans.
+
+---
+
+### 3. What are the types of IoC Containers?
+
+* BeanFactory
+* ApplicationContext
+
+---
+
+### 4. Which IoC Container is commonly used?
+
+✅ ApplicationContext
+
+---
+
+### 5. What is a Spring Bean?
+
+A Bean is an object managed by the Spring Container.
+
+---
+
+### 6. What is the difference between IoC and DI?
+
+| IoC                      | DI                   |
+| ------------------------ | -------------------- |
+| Controls object creation | Injects dependencies |
+
+---
+
+### 7. What is @Component?
+
+It marks a class as a Spring-managed Bean.
+
+---
+
+### 8. What is ApplicationContext?
+
+An advanced IoC Container with enterprise features.
+
+---
+
+### 9. Why is IoC important?
+
+It reduces coupling and improves maintainability.
+
+---
+
+### 10. Can Spring work without IoC?
+
+No. IoC is one of the fundamental concepts of the Spring Framework.
+
+---
+
+# 📝 Summary
+
+* IoC stands for Inversion of Control.
+* Spring manages object creation through the IoC Container.
+* BeanFactory and ApplicationContext are IoC Containers.
+* Beans are managed by the Spring Container.
+* IoC works together with Dependency Injection.
+* IoC promotes loose coupling and scalable application design.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Spring Beans**
+
+* What is a Bean?
+* Bean Creation
+* Bean Scopes
+* Bean Lifecycle
+* @Bean Annotation
+* @Component Annotation
+* Bean Initialization and Destruction
