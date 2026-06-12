@@ -1,0 +1,638 @@
+# Spring Annotations 🏷️
+
+## 📖 What are Spring Annotations?
+
+**Spring Annotations** are special metadata that provide instructions to the Spring Framework.
+
+They reduce XML configuration and make Spring applications easier to develop and maintain.
+
+In simple words:
+
+> **Annotations tell Spring what to do automatically.**
+
+---
+
+# 🎯 Why Use Annotations?
+
+Without Annotations:
+
+❌ XML Configuration
+
+❌ Manual Bean Registration
+
+❌ More Boilerplate Code
+
+❌ Complex Configuration
+
+With Annotations:
+
+✅ Less Configuration
+
+✅ Automatic Bean Management
+
+✅ Dependency Injection
+
+✅ Faster Development
+
+---
+
+# 🏗 Spring Annotation Architecture
+
+```text id="sa1"
+Spring Application
+        │
+        ▼
+Annotations
+        │
+        ├── @Component
+        ├── @Service
+        ├── @Repository
+        ├── @Controller
+        ├── @RestController
+        ├── @Autowired
+        ├── @Bean
+        ├── @Configuration
+        ├── @Primary
+        └── @Qualifier
+```
+
+---
+
+# 🏷 @Component
+
+Marks a class as a Spring Bean.
+
+```java id="sa2"
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student {
+
+}
+```
+
+Spring automatically creates and manages this Bean.
+
+---
+
+# 🏷 @Service
+
+Used for the Service Layer (Business Logic).
+
+```java id="sa3"
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentService {
+
+}
+```
+
+---
+
+# 🏷 @Repository
+
+Used for the Data Access Layer.
+
+```java id="sa4"
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class StudentRepository {
+
+}
+```
+
+It also provides automatic exception translation.
+
+---
+
+# 🏷 @Controller
+
+Used in Spring MVC applications.
+
+Returns Views (HTML Pages).
+
+```java id="sa5"
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class HomeController {
+
+}
+```
+
+---
+
+# 🏷 @RestController
+
+Used for REST APIs.
+
+It combines:
+
+```text id="sa6"
+@RestController
+        │
+        ├── @Controller
+        └── @ResponseBody
+```
+
+Example:
+
+```java id="sa7"
+@RestController
+public class StudentController {
+
+    @GetMapping("/")
+    public String home() {
+        return "Welcome";
+    }
+
+}
+```
+
+Output:
+
+```text id="sa8"
+Welcome
+```
+
+---
+
+# 🏷 @Autowired
+
+Automatically injects dependencies.
+
+```java id="sa9"
+@Service
+class StudentService {
+
+}
+
+@RestController
+class StudentController {
+
+    @Autowired
+    private StudentService service;
+
+}
+```
+
+---
+
+# 🏷 @Bean
+
+Manually creates a Spring Bean.
+
+```java id="sa10"
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public Student student() {
+        return new Student();
+    }
+
+}
+```
+
+---
+
+# 🏷 @Configuration
+
+Marks a class as a Spring Configuration class.
+
+```java id="sa11"
+@Configuration
+public class AppConfig {
+
+}
+```
+
+Usually contains `@Bean` methods.
+
+---
+
+# 🏷 @Primary
+
+Specifies the default Bean when multiple Beans exist.
+
+```java id="sa12"
+@Component
+@Primary
+class DieselEngine {
+
+}
+```
+
+---
+
+# 🏷 @Qualifier
+
+Selects a specific Bean.
+
+```java id="sa13"
+@Autowired
+@Qualifier("dieselEngine")
+private Engine engine;
+```
+
+---
+
+# 🏷 @ComponentScan
+
+Tells Spring where to scan for Components.
+
+```java id="sa14"
+@ComponentScan("com.anup")
+```
+
+---
+
+# 🏷 @SpringBootApplication
+
+Main annotation in Spring Boot.
+
+It combines:
+
+```text id="sa15"
+@SpringBootApplication
+        │
+        ├── @Configuration
+        ├── @EnableAutoConfiguration
+        └── @ComponentScan
+```
+
+Example:
+
+```java id="sa16"
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(
+            DemoApplication.class,
+            args
+        );
+
+    }
+
+}
+```
+
+---
+
+# 🏷 @RequestMapping
+
+Maps HTTP requests.
+
+```java id="sa17"
+@RequestMapping("/students")
+```
+
+---
+
+# 🏷 @GetMapping
+
+Handles HTTP GET requests.
+
+```java id="sa18"
+@GetMapping("/students")
+public String getStudents() {
+    return "Students";
+}
+```
+
+---
+
+# 🏷 @PostMapping
+
+Handles HTTP POST requests.
+
+```java id="sa19"
+@PostMapping("/students")
+```
+
+---
+
+# 🏷 @PutMapping
+
+Handles HTTP PUT requests.
+
+```java id="sa20"
+@PutMapping("/students")
+```
+
+---
+
+# 🏷 @DeleteMapping
+
+Handles HTTP DELETE requests.
+
+```java id="sa21"
+@DeleteMapping("/students")
+```
+
+---
+
+# 🏷 @PathVariable
+
+Extracts values from URL.
+
+```java id="sa22"
+@GetMapping("/students/{id}")
+public String getStudent(
+        @PathVariable int id) {
+
+    return "ID : " + id;
+}
+```
+
+---
+
+# 🏷 @RequestParam
+
+Reads query parameters.
+
+```java id="sa23"
+@GetMapping("/students")
+public String student(
+    @RequestParam String name) {
+
+    return name;
+}
+```
+
+URL:
+
+```text id="sa24"
+http://localhost:8080/students?name=Anup
+```
+
+---
+
+# 🏷 @RequestBody
+
+Converts JSON into Java Object.
+
+```java id="sa25"
+@PostMapping("/students")
+public Student saveStudent(
+        @RequestBody Student student){
+
+    return student;
+
+}
+```
+
+---
+
+# 🏷 @ResponseBody
+
+Returns data directly instead of a view.
+
+```java id="sa26"
+@ResponseBody
+public String home() {
+    return "Hello";
+}
+```
+
+---
+
+# 🏷 @Value
+
+Injects values from properties file.
+
+```java id="sa27"
+@Value("${server.port}")
+private String port;
+```
+
+---
+
+# 🏷 @Profile
+
+Loads Beans based on active profiles.
+
+```java id="sa28"
+@Profile("dev")
+@Component
+public class DevConfig {
+
+}
+```
+
+---
+
+# 🏷 @Lazy
+
+Creates Bean only when required.
+
+```java id="sa29"
+@Lazy
+@Component
+public class Student {
+
+}
+```
+
+---
+
+# 🏷 @Scope
+
+Defines Bean Scope.
+
+```java id="sa30"
+@Scope("prototype")
+@Component
+public class Student {
+
+}
+```
+
+---
+
+# 📊 Most Common Spring Annotations
+
+| Annotation      | Purpose              |
+| --------------- | -------------------- |
+| @Component      | Generic Bean         |
+| @Service        | Business Logic       |
+| @Repository     | Data Access          |
+| @Controller     | MVC Controller       |
+| @RestController | REST API             |
+| @Autowired      | Dependency Injection |
+| @Bean           | Manual Bean Creation |
+| @Configuration  | Configuration Class  |
+| @Primary        | Default Bean         |
+| @Qualifier      | Select Specific Bean |
+| @GetMapping     | GET Request          |
+| @PostMapping    | POST Request         |
+| @PutMapping     | PUT Request          |
+| @DeleteMapping  | DELETE Request       |
+| @RequestBody    | Read JSON            |
+| @PathVariable   | Read URL Parameter   |
+| @RequestParam   | Read Query Parameter |
+
+---
+
+# 🏗 Spring Annotation Flow
+
+```text id="sa31"
+@Component
+      │
+      ▼
+Component Scan
+      │
+      ▼
+Bean Created
+      │
+      ▼
+@Autowired
+      │
+      ▼
+Dependency Injected
+      │
+      ▼
+Application Ready
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="sa32"
+Hospital
+
+Doctor -> @Service
+
+Reception -> @Controller
+
+Medical Records -> @Repository
+
+Patient API -> @RestController
+
+Spring manages everything automatically.
+```
+
+---
+
+# ⭐ Advantages of Spring Annotations
+
+* Less XML Configuration
+* Faster Development
+* Better Readability
+* Automatic Dependency Injection
+* Easy Maintenance
+* Clean Architecture
+
+---
+
+# ❌ Limitations
+
+* Difficult for Beginners
+* Hidden Configuration
+* Debugging Can Be Hard
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What are Spring Annotations?
+
+Metadata that instruct the Spring Framework to perform specific tasks.
+
+---
+
+### 2. What is @Component?
+
+Marks a class as a Spring Bean.
+
+---
+
+### 3. What is @Autowired?
+
+Automatically injects dependencies.
+
+---
+
+### 4. Difference between @Controller and @RestController?
+
+| @Controller  | @RestController   |
+| ------------ | ----------------- |
+| Returns View | Returns JSON/Data |
+
+---
+
+### 5. What is @Bean?
+
+Creates and registers a Bean manually.
+
+---
+
+### 6. What is @Configuration?
+
+Marks a class that contains Bean definitions.
+
+---
+
+### 7. What is @Primary?
+
+Specifies the default Bean.
+
+---
+
+### 8. What is @Qualifier?
+
+Selects a specific Bean when multiple Beans exist.
+
+---
+
+### 9. What is @RequestBody?
+
+Converts JSON request data into a Java object.
+
+---
+
+### 10. What is @SpringBootApplication?
+
+A combination of:
+
+* @Configuration
+* @EnableAutoConfiguration
+* @ComponentScan
+
+---
+
+# 📝 Summary
+
+* Spring Annotations simplify configuration.
+* They reduce XML usage.
+* Core annotations include:
+
+  * @Component
+  * @Service
+  * @Repository
+  * @Controller
+  * @RestController
+  * @Autowired
+  * @Bean
+  * @Configuration
+* Web annotations handle HTTP requests.
+* Annotations are fundamental for Spring Boot development.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **REST API Development**
+
+* What is REST?
+* REST Architecture
+* HTTP Methods
+* REST Principles
+* Building First REST API
+* REST Best Practices
+* REST Interview Questions
