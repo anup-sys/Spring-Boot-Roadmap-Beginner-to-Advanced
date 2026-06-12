@@ -1,0 +1,448 @@
+# Spring Boot Profiles 🎭
+
+## 📖 What are Spring Boot Profiles?
+
+**Spring Boot Profiles** allow you to define different configurations for different environments.
+
+For example, you may need different settings for:
+
+* Development (dev)
+* Testing (test)
+* Production (prod)
+
+Instead of changing configuration files manually, Spring Boot loads the appropriate profile automatically.
+
+---
+
+# 🎯 Why Use Profiles?
+
+Without Profiles:
+
+❌ Change database URL manually
+
+❌ Change server port manually
+
+❌ Modify API keys repeatedly
+
+❌ Risk of deploying wrong configuration
+
+With Profiles:
+
+✅ Separate configuration for each environment
+
+✅ Easy deployment
+
+✅ Better security
+
+✅ Cleaner code
+
+---
+
+# 🌟 Common Environments
+
+```text
+Development (dev)
+        │
+        ▼
+Testing (test)
+        │
+        ▼
+Production (prod)
+```
+
+---
+
+# 🏗 Spring Boot Profile Architecture
+
+```text
+Application
+      │
+      ▼
+Active Profile
+      │
+      ▼
+Load Configuration
+      │
+      ├── application-dev.properties
+      ├── application-test.properties
+      └── application-prod.properties
+```
+
+---
+
+# 📄 Default Configuration File
+
+```text
+src/main/resources/
+        │
+        ├── application.properties
+        ├── application-dev.properties
+        ├── application-test.properties
+        └── application-prod.properties
+```
+
+---
+
+# 📄 application.properties
+
+Main configuration file.
+
+```properties
+spring.application.name=StudentManagement
+```
+
+---
+
+# 📄 Development Profile
+
+File:
+
+```text
+application-dev.properties
+```
+
+Example:
+
+```properties
+server.port=8081
+
+spring.datasource.url=jdbc:mysql://localhost:3306/devdb
+
+spring.datasource.username=root
+
+spring.datasource.password=root
+```
+
+---
+
+# 📄 Testing Profile
+
+File:
+
+```text
+application-test.properties
+```
+
+Example:
+
+```properties
+server.port=8082
+
+spring.datasource.url=jdbc:mysql://localhost:3306/testdb
+```
+
+---
+
+# 📄 Production Profile
+
+File:
+
+```text
+application-prod.properties
+```
+
+Example:
+
+```properties
+server.port=8080
+
+spring.datasource.url=jdbc:mysql://localhost:3306/proddb
+```
+
+---
+
+# ⚙ Activate a Profile
+
+Using `application.properties`
+
+```properties
+spring.profiles.active=dev
+```
+
+Spring Boot loads:
+
+```text
+application-dev.properties
+```
+
+---
+
+# 🚀 Activate Profile Using Command Line
+
+```bash
+java -jar app.jar --spring.profiles.active=prod
+```
+
+---
+
+# 🚀 Activate Profile Using Maven
+
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+---
+
+# 🚀 Activate Profile Using Environment Variable
+
+Linux/macOS:
+
+```bash
+export SPRING_PROFILES_ACTIVE=prod
+```
+
+Windows:
+
+```cmd
+set SPRING_PROFILES_ACTIVE=prod
+```
+
+---
+
+# 🏷 @Profile Annotation
+
+The `@Profile` annotation allows Spring Beans to load only for a specific profile.
+
+Example:
+
+```java
+import org.springframework.context.annotation.*;
+
+@Configuration
+@Profile("dev")
+public class DevConfig {
+
+}
+```
+
+This bean will only load when the **dev** profile is active.
+
+---
+
+# 💻 Multiple Profile Example
+
+```java
+@Service
+@Profile("dev")
+public class DevEmailService {
+
+}
+```
+
+```java
+@Service
+@Profile("prod")
+public class ProductionEmailService {
+
+}
+```
+
+Spring Boot automatically loads the correct service.
+
+---
+
+# 📊 Profile Loading Order
+
+```text
+application.properties
+        │
+        ▼
+Active Profile
+        │
+        ▼
+application-dev.properties
+        │
+        ▼
+Override Default Properties
+```
+
+---
+
+# ⚙ YAML Profile Configuration
+
+```yaml
+spring:
+  profiles:
+    active: dev
+```
+
+---
+
+# ⚙ Multi-Document YAML Example
+
+```yaml
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  port: 8081
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  port: 8080
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text
+ATM System
+
+Development
+     │
+     ▼
+Test Server
+
+Production
+     │
+     ▼
+Live Banking Server
+
+Different environments use different configurations.
+```
+
+---
+
+# ⭐ Advantages of Profiles
+
+* Environment-Specific Configuration
+* Better Security
+* Easy Deployment
+* Cleaner Configuration Management
+* Supports Multiple Environments
+
+---
+
+# ❌ Limitations
+
+* Improper profile management can cause deployment issues.
+* Too many profiles increase complexity.
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What are Spring Boot Profiles?
+
+Profiles allow different configurations for different environments.
+
+---
+
+### 2. What are common profiles?
+
+* dev
+* test
+* prod
+
+---
+
+### 3. How do you activate a profile?
+
+```properties
+spring.profiles.active=dev
+```
+
+---
+
+### 4. What is the purpose of @Profile?
+
+It loads a bean only for a specific profile.
+
+---
+
+### 5. Can multiple profile files exist?
+
+Yes.
+
+Example:
+
+* application-dev.properties
+* application-test.properties
+* application-prod.properties
+
+---
+
+### 6. Which configuration file is loaded first?
+
+```text
+application.properties
+```
+
+Then the active profile overrides its values.
+
+---
+
+### 7. Can profiles be activated from the command line?
+
+Yes.
+
+```bash
+java -jar app.jar --spring.profiles.active=prod
+```
+
+---
+
+### 8. Can profiles be configured in YAML?
+
+Yes.
+
+Using:
+
+```yaml
+spring:
+  profiles:
+    active: dev
+```
+
+---
+
+### 9. Why are profiles important?
+
+They separate development, testing, and production configurations.
+
+---
+
+### 10. Can @Profile be used with Beans?
+
+Yes.
+
+It can be used with:
+
+* @Component
+* @Service
+* @Repository
+* @Configuration
+
+---
+
+# 📝 Summary
+
+* Spring Boot Profiles manage environment-specific configurations.
+* Common profiles are dev, test, and prod.
+* Profile-specific files override default configuration.
+* `@Profile` controls bean loading.
+* Profiles simplify deployment and configuration management.
+* They are essential for real-world Spring Boot applications.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Dependency Injection (DI)**
+
+* What is Dependency Injection?
+* Types of DI
+* Constructor Injection
+* Setter Injection
+* Field Injection
+* @Autowired Annotation
+* Best Practices
