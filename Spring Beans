@@ -1,0 +1,545 @@
+# Spring Beans 🌱
+
+## 📖 What is a Spring Bean?
+
+A **Spring Bean** is an object that is created, managed, and maintained by the **Spring IoC (Inversion of Control) Container**.
+
+In simple words:
+
+> **Any object managed by the Spring Container is called a Spring Bean.**
+
+Spring automatically creates the object, injects dependencies, manages its lifecycle, and destroys it when no longer needed.
+
+---
+
+# 🎯 Why Spring Beans?
+
+Without Spring Beans:
+
+❌ Create objects manually
+
+❌ Manage dependencies manually
+
+❌ Tight coupling
+
+❌ Difficult maintenance
+
+With Spring Beans:
+
+✅ Automatic object creation
+
+✅ Dependency Injection
+
+✅ Loose coupling
+
+✅ Better maintainability
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="sb1"
+Restaurant
+     │
+     ▼
+Chef Prepares Food
+     │
+     ▼
+Waiter Serves Food
+     │
+     ▼
+Customer Receives Food
+```
+
+The customer does not prepare the food.
+
+Similarly, Spring creates and manages Beans.
+
+---
+
+# 🏗 Spring Bean Architecture
+
+```text id="sb2"
+Application
+      │
+      ▼
+Spring IoC Container
+      │
+      ├── Create Bean
+      ├── Manage Bean
+      ├── Inject Dependencies
+      └── Destroy Bean
+```
+
+---
+
+# 🏷 Creating Spring Beans
+
+## 1️⃣ Using @Component
+
+```java id="sb3"
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student {
+
+}
+```
+
+Spring automatically detects and creates the Bean.
+
+---
+
+## 2️⃣ Using @Service
+
+Used for business logic.
+
+```java id="sb4"
+@Service
+public class StudentService {
+
+}
+```
+
+---
+
+## 3️⃣ Using @Repository
+
+Used for database operations.
+
+```java id="sb5"
+@Repository
+public class StudentRepository {
+
+}
+```
+
+---
+
+## 4️⃣ Using @Controller
+
+Used in Spring MVC.
+
+```java id="sb6"
+@Controller
+public class HomeController {
+
+}
+```
+
+---
+
+## 5️⃣ Using @RestController
+
+Used for REST APIs.
+
+```java id="sb7"
+@RestController
+public class StudentController {
+
+}
+```
+
+---
+
+## 6️⃣ Using @Bean Annotation
+
+Beans can also be created manually.
+
+```java id="sb8"
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public Student student() {
+        return new Student();
+    }
+
+}
+```
+
+---
+
+# 🌟 Bean Creation Process
+
+```text id="sb9"
+@Component
+      │
+      ▼
+Component Scan
+      │
+      ▼
+Bean Created
+      │
+      ▼
+Stored in IoC Container
+      │
+      ▼
+Dependency Injection
+      │
+      ▼
+Application Ready
+```
+
+---
+
+# 📦 Bean Scopes
+
+Bean Scope determines how many objects Spring creates.
+
+---
+
+## 1️⃣ Singleton Scope (Default)
+
+Only one object is created.
+
+```java id="sb10"
+@Component
+@Scope("singleton")
+public class Student {
+
+}
+```
+
+```text id="sb11"
+Spring Container
+        │
+        ▼
+      One Object
+```
+
+---
+
+## 2️⃣ Prototype Scope
+
+A new object is created every time.
+
+```java id="sb12"
+@Component
+@Scope("prototype")
+public class Student {
+
+}
+```
+
+```text id="sb13"
+Request 1 → Object 1
+
+Request 2 → Object 2
+```
+
+---
+
+## 3️⃣ Request Scope
+
+One Bean per HTTP request.
+
+```java id="sb14"
+@Scope("request")
+```
+
+---
+
+## 4️⃣ Session Scope
+
+One Bean per user session.
+
+```java id="sb15"
+@Scope("session")
+```
+
+---
+
+## 5️⃣ Application Scope
+
+One Bean for the entire web application.
+
+```java id="sb16"
+@Scope("application")
+```
+
+---
+
+# 📊 Bean Scopes Summary
+
+| Scope       | Description               |
+| ----------- | ------------------------- |
+| Singleton   | One Bean per Container    |
+| Prototype   | New Bean Every Request    |
+| Request     | One Bean per HTTP Request |
+| Session     | One Bean per User Session |
+| Application | One Bean per Application  |
+
+---
+
+# 🔄 Spring Bean Lifecycle
+
+A Spring Bean goes through several stages.
+
+```text id="sb17"
+Bean Definition
+       │
+       ▼
+Bean Instantiation
+       │
+       ▼
+Dependency Injection
+       │
+       ▼
+@PostConstruct
+       │
+       ▼
+Bean Ready
+       │
+       ▼
+@PreDestroy
+       │
+       ▼
+Bean Destroyed
+```
+
+---
+
+# 🏷 @PostConstruct
+
+Runs after the Bean is created.
+
+```java id="sb18"
+@PostConstruct
+public void init() {
+    System.out.println("Bean Initialized");
+}
+```
+
+---
+
+# 🏷 @PreDestroy
+
+Runs before the Bean is destroyed.
+
+```java id="sb19"
+@PreDestroy
+public void destroy() {
+    System.out.println("Bean Destroyed");
+}
+```
+
+---
+
+# 💉 Bean Dependency Injection
+
+```java id="sb20"
+@Component
+class Engine {
+
+}
+
+@Component
+class Car {
+
+    private final Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+}
+```
+
+Spring automatically injects the Engine Bean.
+
+---
+
+# 🏷 @Primary Annotation
+
+Used when multiple Beans of the same type exist.
+
+```java id="sb21"
+@Component
+@Primary
+class DieselEngine {
+
+}
+```
+
+Spring chooses this Bean by default.
+
+---
+
+# 🏷 @Qualifier Annotation
+
+Used to specify which Bean should be injected.
+
+```java id="sb22"
+@Autowired
+@Qualifier("dieselEngine")
+private Engine engine;
+```
+
+---
+
+# 💻 Accessing a Bean
+
+```java id="sb23"
+ApplicationContext context =
+new AnnotationConfigApplicationContext(
+        AppConfig.class
+);
+
+Student student =
+context.getBean(Student.class);
+```
+
+---
+
+# 🏗 Bean Factory Flow
+
+```text id="sb24"
+Spring Boot Starts
+        │
+        ▼
+Component Scan
+        │
+        ▼
+Create Bean
+        │
+        ▼
+Store Bean
+        │
+        ▼
+Inject Dependencies
+        │
+        ▼
+Application Ready
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="sb25"
+Hospital
+
+Doctor
+    │
+    ▼
+Nurse
+    │
+    ▼
+Medicine
+
+Hospital manages everything.
+
+Spring Container manages Beans similarly.
+```
+
+---
+
+# ⭐ Advantages of Spring Beans
+
+* Loose Coupling
+* Automatic Dependency Management
+* Easy Testing
+* Better Code Reusability
+* Easy Maintenance
+* Lifecycle Management
+
+---
+
+# ❌ Disadvantages
+
+* Initial Learning Curve
+* More Abstraction
+* Difficult Debugging for Beginners
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is a Spring Bean?
+
+A Spring Bean is an object managed by the Spring IoC Container.
+
+---
+
+### 2. How can a Bean be created?
+
+* @Component
+* @Service
+* @Repository
+* @Controller
+* @RestController
+* @Bean
+
+---
+
+### 3. What is the default Bean Scope?
+
+✅ Singleton
+
+---
+
+### 4. What is Prototype Scope?
+
+A new Bean object is created every time it is requested.
+
+---
+
+### 5. What is @Bean?
+
+It is used to manually create and register a Bean.
+
+---
+
+### 6. What is @PostConstruct?
+
+A method that executes after Bean creation.
+
+---
+
+### 7. What is @PreDestroy?
+
+A method that executes before Bean destruction.
+
+---
+
+### 8. What is @Primary?
+
+It marks a Bean as the default Bean.
+
+---
+
+### 9. What is @Qualifier?
+
+It selects a specific Bean when multiple Beans exist.
+
+---
+
+### 10. What is Bean Lifecycle?
+
+The sequence of Bean creation, initialization, usage, and destruction.
+
+---
+
+# 📝 Summary
+
+* A Spring Bean is an object managed by the Spring Container.
+* Beans can be created using annotations or @Bean methods.
+* Spring supports multiple Bean scopes.
+* Bean Lifecycle includes creation, initialization, and destruction.
+* @Primary and @Qualifier help resolve multiple Bean conflicts.
+* Spring Beans are fundamental to Dependency Injection and IoC.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Bean Lifecycle**
+
+* Bean Creation
+* Initialization
+* @PostConstruct
+* InitializingBean
+* DisposableBean
+* @PreDestroy
+* Bean Destruction
