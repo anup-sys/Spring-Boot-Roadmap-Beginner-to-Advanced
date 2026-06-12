@@ -1,0 +1,659 @@
+# REST API Development 🌐
+
+## 📖 What is REST?
+
+**REST (Representational State Transfer)** is an architectural style used for designing web services that allow applications to communicate over HTTP.
+
+A **REST API** enables clients (Web, Mobile, Desktop) to interact with a server using standard HTTP methods.
+
+In simple words:
+
+> **REST API is a way for applications to send and receive data over the internet.**
+
+---
+
+# 🎯 Why REST API?
+
+Without REST API:
+
+❌ Difficult communication between applications
+
+❌ Platform dependent
+
+❌ Complex integration
+
+With REST API:
+
+✅ Platform Independent
+
+✅ Lightweight
+
+✅ Scalable
+
+✅ Easy Integration
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="rest1"
+Mobile App
+      │
+      ▼
+REST API
+      │
+      ▼
+Spring Boot Server
+      │
+      ▼
+Database
+```
+
+Example:
+
+A Food Delivery App requests restaurant data through a REST API.
+
+---
+
+# 🏗 REST Architecture
+
+```text id="rest2"
+Client
+(Web/Mobile)
+      │
+      ▼
+HTTP Request
+      │
+      ▼
+REST API
+      │
+      ▼
+Business Logic
+      │
+      ▼
+Database
+      │
+      ▼
+HTTP Response
+      │
+      ▼
+Client
+```
+
+---
+
+# 🌟 REST Principles
+
+## 1️⃣ Client-Server Architecture
+
+Client and Server work independently.
+
+---
+
+## 2️⃣ Stateless
+
+Each request contains all the required information.
+
+The server does not remember previous requests.
+
+Example:
+
+```text id="rest3"
+Request 1 → Login
+
+Request 2 → Send Token
+
+Request 3 → Get Data
+```
+
+---
+
+## 3️⃣ Cacheable
+
+Responses can be cached for better performance.
+
+---
+
+## 4️⃣ Uniform Interface
+
+REST APIs follow standard HTTP methods and URL patterns.
+
+---
+
+## 5️⃣ Layered System
+
+The client does not know whether it is connected directly to the server or through intermediaries.
+
+---
+
+# 🌐 HTTP Methods
+
+## GET
+
+Used to retrieve data.
+
+```text id="rest4"
+GET /students
+```
+
+---
+
+## POST
+
+Used to create new data.
+
+```text id="rest5"
+POST /students
+```
+
+---
+
+## PUT
+
+Used to update existing data.
+
+```text id="rest6"
+PUT /students/1
+```
+
+---
+
+## DELETE
+
+Used to delete data.
+
+```text id="rest7"
+DELETE /students/1
+```
+
+---
+
+## PATCH
+
+Used for partial updates.
+
+```text id="rest8"
+PATCH /students/1
+```
+
+---
+
+# 📊 HTTP Methods Summary
+
+| Method | Operation              |
+| ------ | ---------------------- |
+| GET    | Read Data              |
+| POST   | Create Data            |
+| PUT    | Update Entire Resource |
+| PATCH  | Partial Update         |
+| DELETE | Delete Data            |
+
+---
+
+# 🏷 HTTP Status Codes
+
+## Success
+
+| Code | Meaning    |
+| ---- | ---------- |
+| 200  | OK         |
+| 201  | Created    |
+| 204  | No Content |
+
+---
+
+## Client Errors
+
+| Code | Meaning      |
+| ---- | ------------ |
+| 400  | Bad Request  |
+| 401  | Unauthorized |
+| 403  | Forbidden    |
+| 404  | Not Found    |
+
+---
+
+## Server Errors
+
+| Code | Meaning               |
+| ---- | --------------------- |
+| 500  | Internal Server Error |
+| 503  | Service Unavailable   |
+
+---
+
+# 📦 REST API Request & Response
+
+## GET Request
+
+```http id="rest9"
+GET /students
+```
+
+Response:
+
+```json id="rest10"
+[
+  {
+    "id": 1,
+    "name": "Anup"
+  },
+  {
+    "id": 2,
+    "name": "Rahul"
+  }
+]
+```
+
+---
+
+## POST Request
+
+```http id="rest11"
+POST /students
+```
+
+Request Body:
+
+```json id="rest12"
+{
+  "name": "Anup",
+  "age": 21
+}
+```
+
+Response:
+
+```json id="rest13"
+{
+  "id": 1,
+  "name": "Anup",
+  "age": 21
+}
+```
+
+---
+
+# 🚀 Building First REST API in Spring Boot
+
+## Step 1: Create Controller
+
+```java id="rest14"
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/students")
+public class StudentController {
+
+}
+```
+
+---
+
+## Step 2: Create GET API
+
+```java id="rest15"
+@GetMapping
+public String getStudents() {
+    return "Student List";
+}
+```
+
+Open:
+
+```text id="rest16"
+http://localhost:8080/students
+```
+
+Output:
+
+```text id="rest17"
+Student List
+```
+
+---
+
+## Step 3: Create POST API
+
+```java id="rest18"
+@PostMapping
+public String saveStudent() {
+    return "Student Saved";
+}
+```
+
+---
+
+## Step 4: Create PUT API
+
+```java id="rest19"
+@PutMapping("/{id}")
+public String updateStudent(
+        @PathVariable int id) {
+
+    return "Student Updated";
+
+}
+```
+
+---
+
+## Step 5: Create DELETE API
+
+```java id="rest20"
+@DeleteMapping("/{id}")
+public String deleteStudent(
+        @PathVariable int id) {
+
+    return "Student Deleted";
+
+}
+```
+
+---
+
+# 📄 REST API URL Design
+
+Good Practice:
+
+```text id="rest21"
+/students
+
+/students/1
+
+/students/1/courses
+```
+
+Bad Practice:
+
+```text id="rest22"
+/getStudent
+
+/deleteStudent
+
+/updateStudent
+```
+
+Use nouns, not verbs.
+
+---
+
+# 🏷 Important Spring Boot Annotations
+
+## @RestController
+
+Creates REST APIs.
+
+```java id="rest23"
+@RestController
+```
+
+---
+
+## @RequestMapping
+
+Defines base URL.
+
+```java id="rest24"
+@RequestMapping("/students")
+```
+
+---
+
+## @GetMapping
+
+Handles GET requests.
+
+```java id="rest25"
+@GetMapping
+```
+
+---
+
+## @PostMapping
+
+Handles POST requests.
+
+```java id="rest26"
+@PostMapping
+```
+
+---
+
+## @PutMapping
+
+Handles PUT requests.
+
+```java id="rest27"
+@PutMapping
+```
+
+---
+
+## @DeleteMapping
+
+Handles DELETE requests.
+
+```java id="rest28"
+@DeleteMapping
+```
+
+---
+
+## @PathVariable
+
+Reads URL values.
+
+```java id="rest29"
+@PathVariable int id
+```
+
+---
+
+## @RequestParam
+
+Reads query parameters.
+
+```java id="rest30"
+@RequestParam String name
+```
+
+---
+
+## @RequestBody
+
+Reads JSON data.
+
+```java id="rest31"
+@RequestBody Student student
+```
+
+---
+
+# 🧪 Testing REST APIs
+
+Popular Tools:
+
+* Postman
+* Insomnia
+* cURL
+
+Example:
+
+```bash id="rest32"
+curl http://localhost:8080/students
+```
+
+---
+
+# 🏗 REST API Request Flow
+
+```text id="rest33"
+Client
+   │
+   ▼
+HTTP Request
+   │
+   ▼
+Controller
+   │
+   ▼
+Service
+   │
+   ▼
+Repository
+   │
+   ▼
+Database
+   │
+   ▼
+HTTP Response
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="rest34"
+E-Commerce App
+
+Mobile App
+      │
+      ▼
+GET /products
+      │
+      ▼
+Spring Boot API
+      │
+      ▼
+Database
+      │
+      ▼
+Product List
+```
+
+---
+
+# ⭐ REST API Best Practices
+
+* Use Proper HTTP Methods
+* Use Meaningful URLs
+* Return Correct Status Codes
+* Keep APIs Stateless
+* Use JSON Format
+* Handle Exceptions Properly
+* Validate User Input
+* Version APIs
+
+Example:
+
+```text id="rest35"
+/api/v1/students
+```
+
+---
+
+# ❌ Common Mistakes
+
+* Using verbs in URLs
+* Returning incorrect status codes
+* Ignoring validation
+* Not handling exceptions
+* Exposing sensitive data
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is REST?
+
+REST is an architectural style for building web services.
+
+---
+
+### 2. What does REST stand for?
+
+Representational State Transfer.
+
+---
+
+### 3. What are the HTTP methods?
+
+* GET
+* POST
+* PUT
+* PATCH
+* DELETE
+
+---
+
+### 4. What is Statelessness?
+
+The server does not store client session information.
+
+---
+
+### 5. Difference between PUT and PATCH?
+
+| PUT         | PATCH          |
+| ----------- | -------------- |
+| Full Update | Partial Update |
+
+---
+
+### 6. What is @RestController?
+
+It creates RESTful web services and returns data directly.
+
+---
+
+### 7. What is @RequestBody?
+
+Converts JSON request data into a Java object.
+
+---
+
+### 8. What is HTTP Status Code 201?
+
+Resource Created Successfully.
+
+---
+
+### 9. Which format is commonly used in REST APIs?
+
+✅ JSON
+
+---
+
+### 10. What tool is commonly used to test REST APIs?
+
+* Postman
+* cURL
+* Insomnia
+
+---
+
+# 📝 Summary
+
+* REST is an architectural style for web services.
+* REST APIs use HTTP methods.
+* JSON is the most common data format.
+* Spring Boot provides annotations for building REST APIs.
+* REST APIs should be stateless.
+* Good API design follows REST principles and best practices.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **HTTP Methods**
+
+* GET
+* POST
+* PUT
+* PATCH
+* DELETE
+* HEAD
+* OPTIONS
+* Safe vs Idempotent Methods
+* REST API Examples
