@@ -1,0 +1,491 @@
+# Exception Handling in Java ☕
+
+## 📖 What is Exception Handling?
+
+**Exception Handling** is a mechanism in Java that handles runtime errors, allowing the program to continue its normal execution without crashing.
+
+An **Exception** is an unwanted or unexpected event that occurs during the execution of a program.
+
+### Example
+
+```java
+public class Main {
+    public static void main(String[] args) {
+
+        int a = 10;
+        int b = 0;
+
+        System.out.println(a / b);
+
+    }
+}
+```
+
+### Output
+
+```text
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+```
+
+Without exception handling, the program terminates abnormally.
+
+---
+
+# 🎯 Why Exception Handling?
+
+* Prevents program crashes
+* Maintains normal program flow
+* Improves code readability
+* Separates error handling from business logic
+* Makes applications robust
+
+---
+
+# ⚡ Exception Hierarchy
+
+```text
+                Object
+                   │
+             Throwable
+             ┌─────┴─────┐
+             │           │
+          Error      Exception
+                          │
+          ┌───────────────┴───────────────┐
+          │                               │
+   Checked Exception           Unchecked Exception
+```
+
+---
+
+# 📚 Types of Exceptions
+
+## 1️⃣ Checked Exceptions
+
+These exceptions are checked at compile time.
+
+Examples:
+
+* IOException
+* SQLException
+* ClassNotFoundException
+* FileNotFoundException
+
+```java
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        FileReader file = new FileReader("abc.txt");
+
+    }
+}
+```
+
+---
+
+## 2️⃣ Unchecked Exceptions
+
+These exceptions occur during runtime.
+
+Examples:
+
+* ArithmeticException
+* NullPointerException
+* ArrayIndexOutOfBoundsException
+* NumberFormatException
+
+```java
+int a = 10;
+int b = 0;
+
+System.out.println(a / b);
+```
+
+---
+
+# 🛠 try-catch Block
+
+The `try` block contains risky code.
+
+The `catch` block handles the exception.
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+
+        try {
+
+            int a = 10;
+            int b = 0;
+
+            System.out.println(a / b);
+
+        } catch (ArithmeticException e) {
+
+            System.out.println("Cannot divide by zero.");
+
+        }
+
+    }
+}
+```
+
+### Output
+
+```text
+Cannot divide by zero.
+```
+
+---
+
+# 🔄 Multiple catch Blocks
+
+A program can have multiple catch blocks.
+
+```java
+try {
+
+    String str = null;
+
+    System.out.println(str.length());
+
+} catch (ArithmeticException e) {
+
+    System.out.println("Arithmetic Error");
+
+} catch (NullPointerException e) {
+
+    System.out.println("Null Pointer Error");
+
+}
+```
+
+### Output
+
+```text
+Null Pointer Error
+```
+
+---
+
+# 🔚 finally Block
+
+The `finally` block always executes whether an exception occurs or not.
+
+```java
+try {
+
+    int a = 10 / 2;
+
+} catch (Exception e) {
+
+    System.out.println(e);
+
+} finally {
+
+    System.out.println("Finally Block Executed");
+
+}
+```
+
+### Output
+
+```text
+Finally Block Executed
+```
+
+---
+
+# 🚀 throw Keyword
+
+The `throw` keyword is used to explicitly throw an exception.
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+
+        int age = 16;
+
+        if (age < 18) {
+            throw new ArithmeticException("Not Eligible");
+        }
+
+    }
+}
+```
+
+---
+
+# 📢 throws Keyword
+
+The `throws` keyword declares exceptions that may occur.
+
+```java
+import java.io.*;
+
+public class Main {
+
+    static void readFile() throws IOException {
+
+        FileReader file = new FileReader("abc.txt");
+
+    }
+
+}
+```
+
+---
+
+# 🔥 Difference Between throw and throws
+
+| throw                      | throws                          |
+| -------------------------- | ------------------------------- |
+| Used to throw an exception | Used to declare exceptions      |
+| Used inside method         | Used with method signature      |
+| Throws one exception       | Can declare multiple exceptions |
+
+---
+
+# 🏗 Custom Exception
+
+Java allows developers to create their own exceptions.
+
+```java
+class InvalidAgeException extends Exception {
+
+    InvalidAgeException(String message) {
+        super(message);
+    }
+
+}
+
+public class Main {
+
+    static void checkAge(int age) throws InvalidAgeException {
+
+        if (age < 18) {
+            throw new InvalidAgeException("Age must be 18 or above.");
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        try {
+
+            checkAge(16);
+
+        } catch (InvalidAgeException e) {
+
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+}
+```
+
+### Output
+
+```text
+Age must be 18 or above.
+```
+
+---
+
+# ⚙ Common Runtime Exceptions
+
+## ArithmeticException
+
+```java
+int a = 10 / 0;
+```
+
+---
+
+## NullPointerException
+
+```java
+String name = null;
+
+System.out.println(name.length());
+```
+
+---
+
+## ArrayIndexOutOfBoundsException
+
+```java
+int arr[] = {10,20};
+
+System.out.println(arr[5]);
+```
+
+---
+
+## NumberFormatException
+
+```java
+int num = Integer.parseInt("Java");
+```
+
+---
+
+## ClassCastException
+
+```java
+Object obj = "Java";
+
+Integer n = (Integer)obj;
+```
+
+---
+
+# 📊 Checked vs Unchecked Exceptions
+
+| Checked      | Unchecked            |
+| ------------ | -------------------- |
+| Compile Time | Runtime              |
+| Must Handle  | Optional             |
+| IOException  | ArithmeticException  |
+| SQLException | NullPointerException |
+
+---
+
+# 🌍 Real-Life Example
+
+```text
+ATM Withdrawal
+
+Insert Card
+      │
+      ▼
+Enter PIN
+      │
+      ▼
+Check Balance
+      │
+      ▼
+Insufficient Balance?
+      │
+ ┌────┴────┐
+ │         │
+Yes       No
+ │         │
+Show      Withdraw
+Error     Money
+Message
+```
+
+Exception handling helps prevent the ATM system from crashing.
+
+---
+
+# ⭐ Best Practices
+
+* Catch specific exceptions.
+* Avoid empty catch blocks.
+* Use finally for cleanup.
+* Create custom exceptions when needed.
+* Do not use exceptions for normal program flow.
+* Log exceptions properly.
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is an Exception?
+
+An exception is an unexpected event that disrupts the normal flow of a program.
+
+---
+
+### 2. What is Exception Handling?
+
+A mechanism to handle runtime errors and maintain normal program execution.
+
+---
+
+### 3. What is the difference between Error and Exception?
+
+| Error                | Exception           |
+| -------------------- | ------------------- |
+| Serious problem      | Recoverable problem |
+| Cannot handle easily | Can be handled      |
+
+---
+
+### 4. Difference between Checked and Unchecked Exception?
+
+Checked exceptions are checked at compile time, whereas unchecked exceptions occur at runtime.
+
+---
+
+### 5. What is the purpose of finally block?
+
+The finally block executes regardless of whether an exception occurs.
+
+---
+
+### 6. Difference between throw and throws?
+
+* throw → Used to explicitly throw an exception.
+* throws → Used to declare exceptions.
+
+---
+
+### 7. Can we have multiple catch blocks?
+
+Yes, Java allows multiple catch blocks.
+
+---
+
+### 8. Can we use try without catch?
+
+Yes, if it is followed by a finally block.
+
+```java
+try {
+
+} finally {
+
+}
+```
+
+---
+
+# 📝 Summary
+
+* Exception Handling manages runtime errors.
+* Java provides:
+
+  * try
+  * catch
+  * finally
+  * throw
+  * throws
+* Exceptions are of two types:
+
+  * Checked
+  * Unchecked
+* Custom exceptions can be created.
+* Proper exception handling improves application reliability.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Multithreading Basics in Java**
+
+* What is Thread?
+* Thread Lifecycle
+* Creating Threads
+* Runnable Interface
+* Synchronization
+* Thread Communication
+* Executor Framework
