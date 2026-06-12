@@ -1,0 +1,610 @@
+# HTTP Methods 🌐
+
+## 📖 What are HTTP Methods?
+
+**HTTP Methods (HTTP Verbs)** define the type of action a client wants to perform on a server.
+
+They are used in REST APIs to perform CRUD (Create, Read, Update, Delete) operations.
+
+In simple words:
+
+> **HTTP Methods tell the server what action to perform.**
+
+---
+
+# 🎯 Why HTTP Methods?
+
+Without HTTP Methods:
+
+❌ No standard communication
+
+❌ Difficult API design
+
+❌ Confusing operations
+
+With HTTP Methods:
+
+✅ Standardized Communication
+
+✅ Easy API Development
+
+✅ Better REST Design
+
+✅ Platform Independent
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="hm1"
+Bank ATM
+
+Check Balance
+       │
+       ▼
+GET
+
+Deposit Money
+       │
+       ▼
+POST
+
+Update PIN
+       │
+       ▼
+PUT
+
+Close Account
+       │
+       ▼
+DELETE
+```
+
+---
+
+# 🏗 HTTP Request Structure
+
+```text id="hm2"
+HTTP Request
+      │
+      ├── Method
+      ├── URL
+      ├── Headers
+      └── Body
+```
+
+Example:
+
+```http id="hm3"
+GET /students HTTP/1.1
+Host: localhost:8080
+```
+
+---
+
+# 🌟 CRUD Operations
+
+| CRUD   | HTTP Method |
+| ------ | ----------- |
+| Create | POST        |
+| Read   | GET         |
+| Update | PUT / PATCH |
+| Delete | DELETE      |
+
+---
+
+# 🔵 GET Method
+
+Used to retrieve data from the server.
+
+### Example
+
+```http id="hm4"
+GET /students
+```
+
+Spring Boot:
+
+```java id="hm5"
+@GetMapping("/students")
+public String getStudents() {
+    return "Student List";
+}
+```
+
+Response:
+
+```json id="hm6"
+[
+  {
+    "id": 1,
+    "name": "Anup"
+  }
+]
+```
+
+### Characteristics
+
+* Safe ✅
+* Idempotent ✅
+* No Request Body
+
+---
+
+# 🟢 POST Method
+
+Used to create a new resource.
+
+### Example
+
+```http id="hm7"
+POST /students
+```
+
+Request Body:
+
+```json id="hm8"
+{
+  "name": "Anup",
+  "age": 21
+}
+```
+
+Spring Boot:
+
+```java id="hm9"
+@PostMapping("/students")
+public String saveStudent() {
+    return "Student Saved";
+}
+```
+
+### Characteristics
+
+* Safe ❌
+* Idempotent ❌
+* Request Body Required
+
+---
+
+# 🟡 PUT Method
+
+Used to completely update an existing resource.
+
+### Example
+
+```http id="hm10"
+PUT /students/1
+```
+
+Request Body:
+
+```json id="hm11"
+{
+  "name": "Anup Kumar",
+  "age": 22
+}
+```
+
+Spring Boot:
+
+```java id="hm12"
+@PutMapping("/students/{id}")
+public String updateStudent(
+        @PathVariable int id) {
+
+    return "Updated";
+}
+```
+
+### Characteristics
+
+* Safe ❌
+* Idempotent ✅
+
+---
+
+# 🟠 PATCH Method
+
+Used to partially update a resource.
+
+### Example
+
+```http id="hm13"
+PATCH /students/1
+```
+
+Request Body:
+
+```json id="hm14"
+{
+  "age": 22
+}
+```
+
+Spring Boot:
+
+```java id="hm15"
+@PatchMapping("/students/{id}")
+public String updateAge() {
+    return "Age Updated";
+}
+```
+
+### Characteristics
+
+* Safe ❌
+* Idempotent Usually ✅
+
+---
+
+# 🔴 DELETE Method
+
+Used to remove a resource.
+
+### Example
+
+```http id="hm16"
+DELETE /students/1
+```
+
+Spring Boot:
+
+```java id="hm17"
+@DeleteMapping("/students/{id}")
+public String deleteStudent() {
+    return "Deleted";
+}
+```
+
+### Characteristics
+
+* Safe ❌
+* Idempotent ✅
+
+---
+
+# 🟣 HEAD Method
+
+Similar to GET but returns only headers.
+
+No response body is returned.
+
+Example:
+
+```http id="hm18"
+HEAD /students
+```
+
+Uses:
+
+* Check Resource Availability
+* Check File Size
+* Verify Last Modified Time
+
+---
+
+# ⚫ OPTIONS Method
+
+Returns supported HTTP methods.
+
+Example:
+
+```http id="hm19"
+OPTIONS /students
+```
+
+Response:
+
+```text id="hm20"
+Allow:
+GET, POST, PUT, DELETE
+```
+
+---
+
+# 🔘 TRACE Method
+
+Used for diagnostic purposes.
+
+```http id="hm21"
+TRACE /students
+```
+
+Rarely used in modern applications.
+
+---
+
+# ⚪ CONNECT Method
+
+Creates a network tunnel.
+
+Mostly used with HTTPS proxies.
+
+```http id="hm22"
+CONNECT server.example.com:443
+```
+
+---
+
+# 📊 HTTP Methods Summary
+
+| Method  | CRUD                  | Safe | Idempotent |
+| ------- | --------------------- | ---- | ---------- |
+| GET     | Read                  | ✅    | ✅          |
+| POST    | Create                | ❌    | ❌          |
+| PUT     | Update                | ❌    | ✅          |
+| PATCH   | Partial Update        | ❌    | Usually ✅  |
+| DELETE  | Delete                | ❌    | ✅          |
+| HEAD    | Read Headers          | ✅    | ✅          |
+| OPTIONS | Get Supported Methods | ✅    | ✅          |
+| TRACE   | Diagnostic            | ✅    | ✅          |
+| CONNECT | Tunnel                | ❌    | ❌          |
+
+---
+
+# 🏷 Safe Methods
+
+Safe methods do not modify server data.
+
+Examples:
+
+```text id="hm23"
+GET
+
+HEAD
+
+OPTIONS
+```
+
+---
+
+# 🏷 Idempotent Methods
+
+Calling the method multiple times produces the same result.
+
+Example:
+
+```text id="hm24"
+PUT
+
+DELETE
+
+GET
+```
+
+---
+
+# 📦 HTTP Status Codes
+
+## Success
+
+| Code | Meaning    |
+| ---- | ---------- |
+| 200  | OK         |
+| 201  | Created    |
+| 204  | No Content |
+
+---
+
+## Client Error
+
+| Code | Meaning      |
+| ---- | ------------ |
+| 400  | Bad Request  |
+| 401  | Unauthorized |
+| 403  | Forbidden    |
+| 404  | Not Found    |
+
+---
+
+## Server Error
+
+| Code | Meaning               |
+| ---- | --------------------- |
+| 500  | Internal Server Error |
+| 503  | Service Unavailable   |
+
+---
+
+# 💻 Spring Boot REST API Example
+
+```java id="hm25"
+@RestController
+@RequestMapping("/students")
+public class StudentController {
+
+    @GetMapping
+    public String get() {
+        return "GET";
+    }
+
+    @PostMapping
+    public String post() {
+        return "POST";
+    }
+
+    @PutMapping("/{id}")
+    public String put() {
+        return "PUT";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete() {
+        return "DELETE";
+    }
+
+}
+```
+
+---
+
+# 🏗 HTTP Request Flow
+
+```text id="hm26"
+Client
+   │
+   ▼
+HTTP Method
+   │
+   ▼
+Spring Controller
+   │
+   ▼
+Service Layer
+   │
+   ▼
+Repository Layer
+   │
+   ▼
+Database
+   │
+   ▼
+HTTP Response
+```
+
+---
+
+# 🌍 REST API URL Examples
+
+```text id="hm27"
+GET     /students
+
+GET     /students/1
+
+POST    /students
+
+PUT     /students/1
+
+PATCH   /students/1
+
+DELETE  /students/1
+```
+
+---
+
+# ⭐ Best Practices
+
+* Use GET for reading data
+* Use POST for creating resources
+* Use PUT for full updates
+* Use PATCH for partial updates
+* Use DELETE for deleting resources
+* Return proper HTTP status codes
+* Use nouns in URLs
+
+Good:
+
+```text id="hm28"
+/students
+```
+
+Bad:
+
+```text id="hm29"
+/getStudents
+```
+
+---
+
+# ❌ Common Mistakes
+
+* Using POST for updates
+* Using GET for deletion
+* Returning incorrect status codes
+* Ignoring REST conventions
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What are HTTP Methods?
+
+HTTP Methods define the action to be performed on a server.
+
+---
+
+### 2. Which HTTP method is used to create data?
+
+✅ POST
+
+---
+
+### 3. Which HTTP method retrieves data?
+
+✅ GET
+
+---
+
+### 4. Difference between PUT and PATCH?
+
+| PUT         | PATCH          |
+| ----------- | -------------- |
+| Full Update | Partial Update |
+
+---
+
+### 5. Which method is idempotent?
+
+* GET
+* PUT
+* DELETE
+
+---
+
+### 6. Which method is not idempotent?
+
+✅ POST
+
+---
+
+### 7. What is the purpose of the HEAD method?
+
+Returns only response headers.
+
+---
+
+### 8. What is the OPTIONS method?
+
+Returns the supported HTTP methods.
+
+---
+
+### 9. Which HTTP method is used to delete data?
+
+✅ DELETE
+
+---
+
+### 10. What does HTTP Status Code 201 mean?
+
+Resource Created Successfully.
+
+---
+
+# 📝 Summary
+
+* HTTP Methods define actions in REST APIs.
+* CRUD operations map to HTTP methods.
+* GET retrieves data.
+* POST creates data.
+* PUT updates entire resources.
+* PATCH updates partial resources.
+* DELETE removes resources.
+* Safe and Idempotent methods are important REST concepts.
+* Proper HTTP methods improve API design.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **CRUD Operations**
+
+* What is CRUD?
+* Create Operation
+* Read Operation
+* Update Operation
+* Delete Operation
+* CRUD API in Spring Boot
+* CRUD Best Practices
+* CRUD Interview Questions
