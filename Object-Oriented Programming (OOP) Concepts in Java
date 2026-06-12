@@ -1,0 +1,551 @@
+# Object-Oriented Programming (OOP) Concepts in Java ☕
+
+## 📖 What is OOP?
+
+**Object-Oriented Programming (OOP)** is a programming paradigm that organizes software design around **objects** rather than functions and logic.
+
+An **object** is an instance of a **class** that contains both **data (variables)** and **behavior (methods)**.
+
+Java is known as a **pure object-oriented programming language** (except for primitive data types).
+
+---
+
+# 🎯 Why OOP?
+
+OOP helps developers build software that is:
+
+* ✅ Modular
+* ✅ Reusable
+* ✅ Scalable
+* ✅ Secure
+* ✅ Easy to Maintain
+
+---
+
+# 🏗 Basic Terminology
+
+## Class
+
+A class is a blueprint for creating objects.
+
+### Example
+
+```java
+class Student {
+
+    String name;
+    int age;
+
+}
+```
+
+---
+
+## Object
+
+An object is an instance of a class.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+
+        Student s1 = new Student();
+
+        s1.name = "Anup";
+        s1.age = 21;
+
+        System.out.println(s1.name);
+    }
+}
+```
+
+### Output
+
+```text
+Anup
+```
+
+---
+
+# 🌟 Four Pillars of OOP
+
+```text
+Object-Oriented Programming
+│
+├── Encapsulation
+├── Inheritance
+├── Polymorphism
+└── Abstraction
+```
+
+---
+
+# 1️⃣ Encapsulation
+
+## Definition
+
+Encapsulation means **wrapping data and methods into a single unit (class)** and restricting direct access to data.
+
+It is achieved using:
+
+* private variables
+* public getter methods
+* public setter methods
+
+### Example
+
+```java
+class Student {
+
+    private String name;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Student s = new Student();
+
+        s.setName("Anup");
+
+        System.out.println(s.getName());
+
+    }
+}
+```
+
+### Output
+
+```text
+Anup
+```
+
+### Advantages
+
+* Data Security
+* Better Control
+* Easy Maintenance
+
+---
+
+# 2️⃣ Inheritance
+
+## Definition
+
+Inheritance allows one class to acquire the properties and methods of another class.
+
+### Syntax
+
+```java
+class Parent {
+
+}
+
+class Child extends Parent {
+
+}
+```
+
+### Example
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Dog d = new Dog();
+
+        d.sound();
+
+    }
+}
+```
+
+### Output
+
+```text
+Animal makes sound
+```
+
+---
+
+## Types of Inheritance
+
+### Single Inheritance
+
+```text
+Animal
+   │
+   ▼
+ Dog
+```
+
+### Multilevel Inheritance
+
+```text
+Animal
+   │
+   ▼
+ Mammal
+   │
+   ▼
+ Dog
+```
+
+### Hierarchical Inheritance
+
+```text
+      Animal
+      /    \
+     /      \
+   Dog      Cat
+```
+
+> Java does not support Multiple Inheritance through classes but supports it through interfaces.
+
+---
+
+# 3️⃣ Polymorphism
+
+## Definition
+
+Polymorphism means **one action, many forms**.
+
+There are two types:
+
+* Compile-Time Polymorphism (Method Overloading)
+* Run-Time Polymorphism (Method Overriding)
+
+---
+
+## Method Overloading
+
+Multiple methods with the same name but different parameters.
+
+```java
+class Calculator {
+
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+```
+
+---
+
+## Method Overriding
+
+Child class provides its own implementation.
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal Sound");
+    }
+}
+
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Dog Barks");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Dog d = new Dog();
+
+        d.sound();
+
+    }
+}
+```
+
+### Output
+
+```text
+Dog Barks
+```
+
+---
+
+# 4️⃣ Abstraction
+
+## Definition
+
+Abstraction means hiding implementation details and showing only essential features.
+
+Java achieves abstraction using:
+
+* Abstract Class
+* Interface
+
+---
+
+## Abstract Class
+
+```java
+abstract class Animal {
+
+    abstract void sound();
+}
+
+class Dog extends Animal {
+
+    void sound() {
+        System.out.println("Dog Barks");
+    }
+}
+```
+
+---
+
+## Interface
+
+```java
+interface Vehicle {
+
+    void start();
+}
+
+class Car implements Vehicle {
+
+    public void start() {
+        System.out.println("Car Started");
+    }
+}
+```
+
+---
+
+# 🔑 Constructor
+
+A constructor is a special method used to initialize objects.
+
+```java
+class Student {
+
+    Student() {
+        System.out.println("Constructor Called");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Student s = new Student();
+
+    }
+}
+```
+
+### Output
+
+```text
+Constructor Called
+```
+
+---
+
+# 🔑 this Keyword
+
+The `this` keyword refers to the current object.
+
+```java
+class Student {
+
+    String name;
+
+    Student(String name) {
+        this.name = name;
+    }
+}
+```
+
+---
+
+# 🔑 super Keyword
+
+The `super` keyword refers to the parent class.
+
+```java
+class Animal {
+
+    Animal() {
+        System.out.println("Animal Constructor");
+    }
+}
+
+class Dog extends Animal {
+
+    Dog() {
+        super();
+    }
+}
+```
+
+---
+
+# 🔑 Access Modifiers
+
+| Modifier  | Same Class | Same Package | Subclass | Other Package |
+| --------- | ---------- | ------------ | -------- | ------------- |
+| private   | ✅          | ❌            | ❌        | ❌             |
+| default   | ✅          | ✅            | ❌        | ❌             |
+| protected | ✅          | ✅            | ✅        | ❌             |
+| public    | ✅          | ✅            | ✅        | ✅             |
+
+---
+
+# 📊 OOP Concepts Summary
+
+| Concept       | Purpose            |
+| ------------- | ------------------ |
+| Class         | Blueprint          |
+| Object        | Instance of Class  |
+| Encapsulation | Data Hiding        |
+| Inheritance   | Code Reusability   |
+| Polymorphism  | Multiple Behaviors |
+| Abstraction   | Hide Complexity    |
+| Constructor   | Initialize Objects |
+| Interface     | Full Abstraction   |
+
+---
+
+# 🌍 Real-Life Example
+
+```text
+Car
+│
+├── Color
+├── Model
+├── Speed
+│
+├── Start()
+├── Stop()
+└── Brake()
+```
+
+Here,
+
+* Car → Class
+* BMW Car → Object
+* Engine Details Hidden → Abstraction
+* Private Engine Data → Encapsulation
+* Sports Car extends Car → Inheritance
+* Different Start Methods → Polymorphism
+
+---
+
+# 🎯 Advantages of OOP
+
+* Code Reusability
+* Better Security
+* Easy Maintenance
+* Modular Programming
+* Scalability
+* Flexibility
+* Faster Development
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is OOP?
+
+OOP is a programming paradigm based on objects and classes.
+
+---
+
+### 2. What are the four pillars of OOP?
+
+* Encapsulation
+* Inheritance
+* Polymorphism
+* Abstraction
+
+---
+
+### 3. Difference between Method Overloading and Overriding?
+
+| Overloading          | Overriding      |
+| -------------------- | --------------- |
+| Same Class           | Parent & Child  |
+| Compile Time         | Run Time        |
+| Different Parameters | Same Parameters |
+
+---
+
+### 4. What is the difference between Abstract Class and Interface?
+
+| Abstract Class        | Interface                |
+| --------------------- | ------------------------ |
+| Can have constructors | Cannot have constructors |
+| Partial abstraction   | Full abstraction         |
+| extends keyword       | implements keyword       |
+
+---
+
+### 5. What is Encapsulation?
+
+Wrapping data and methods into a single class and restricting direct access.
+
+---
+
+# 📝 Summary
+
+* OOP stands for Object-Oriented Programming.
+* Java is based on OOP principles.
+* OOP consists of:
+
+  * Encapsulation
+  * Inheritance
+  * Polymorphism
+  * Abstraction
+* Constructors initialize objects.
+* Interfaces provide abstraction.
+* OOP improves code reusability and maintainability.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Collections Framework in Java**
+
+* List
+* Set
+* Queue
+* Map
+* ArrayList
+* LinkedList
+* HashSet
+* HashMap
+* PriorityQueue
