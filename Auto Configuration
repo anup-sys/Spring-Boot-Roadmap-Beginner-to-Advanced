@@ -1,0 +1,495 @@
+# Auto Configuration ⚙️
+
+## 📖 What is Auto Configuration?
+
+**Auto Configuration** is one of the most powerful features of Spring Boot.
+
+It automatically configures your Spring application based on the dependencies available in the classpath.
+
+In simple words:
+
+> **Spring Boot automatically sets up the required configuration so that developers don't have to write it manually.**
+
+---
+
+# 🎯 Why Auto Configuration?
+
+Before Spring Boot:
+
+❌ Configure DispatcherServlet
+
+❌ Configure Tomcat
+
+❌ Configure DataSource
+
+❌ Configure Hibernate
+
+❌ Configure Bean Definitions
+
+❌ Write XML Configuration
+
+With Spring Boot:
+
+✅ Automatic Configuration
+
+✅ Less Boilerplate Code
+
+✅ Faster Development
+
+✅ Production Ready Setup
+
+---
+
+# 🌟 How Auto Configuration Works
+
+Spring Boot checks:
+
+* Available Dependencies
+* Existing Beans
+* Configuration Properties
+* Environment Variables
+
+Then it automatically configures the application.
+
+---
+
+# 🏗 Auto Configuration Flow
+
+```text id="n0p4sv"
+Add Dependency
+       │
+       ▼
+Spring Boot Starts
+       │
+       ▼
+Scan Classpath
+       │
+       ▼
+Check Available Libraries
+       │
+       ▼
+Create Required Beans
+       │
+       ▼
+Application Ready
+```
+
+---
+
+# 🚀 Example
+
+Suppose you add:
+
+```xml id="rwl3pk"
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+Spring Boot automatically configures:
+
+* Embedded Tomcat
+* DispatcherServlet
+* Spring MVC
+* JSON Converter (Jackson)
+* Error Handling
+
+No manual setup required.
+
+---
+
+# 🏷 @EnableAutoConfiguration
+
+The annotation responsible for enabling Auto Configuration is:
+
+```java id="7j3x9w"
+@EnableAutoConfiguration
+```
+
+It tells Spring Boot:
+
+> "Automatically configure the application based on available dependencies."
+
+---
+
+# 🌟 @SpringBootApplication
+
+Most developers never use `@EnableAutoConfiguration` directly because:
+
+```java id="bjlwm3"
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(
+            DemoApplication.class,
+            args
+        );
+
+    }
+
+}
+```
+
+`@SpringBootApplication` combines:
+
+```text id="3z2slv"
+@SpringBootApplication
+        │
+        ├── @Configuration
+        ├── @EnableAutoConfiguration
+        └── @ComponentScan
+```
+
+---
+
+# 📦 Auto Configuration Example
+
+## Web Application
+
+Dependency:
+
+```xml id="jlwm112"
+spring-boot-starter-web
+```
+
+Automatically Configures:
+
+* Tomcat
+* Spring MVC
+* REST Support
+* Jackson
+
+---
+
+## Database Application
+
+Dependency:
+
+```xml id="jlwm113"
+spring-boot-starter-data-jpa
+```
+
+Automatically Configures:
+
+* Hibernate
+* EntityManager
+* Transaction Manager
+* JPA Repository
+
+---
+
+## Security Application
+
+Dependency:
+
+```xml id="jlwm114"
+spring-boot-starter-security
+```
+
+Automatically Configures:
+
+* Spring Security
+* Login Page
+* Authentication Manager
+
+---
+
+# 🔍 Behind the Scenes
+
+Spring Boot uses:
+
+```text id="jlwm115"
+META-INF/spring.factories
+```
+
+(Spring Boot 2)
+
+and
+
+```text id="jlwm116"
+META-INF/spring/
+org.springframework.boot.autoconfigure.AutoConfiguration.imports
+```
+
+(Spring Boot 3)
+
+to discover auto-configuration classes.
+
+---
+
+# 🏗 Auto Configuration Architecture
+
+```text id="jlwm117"
+Application
+      │
+      ▼
+@SpringBootApplication
+      │
+      ▼
+@EnableAutoConfiguration
+      │
+      ▼
+Auto Configuration Classes
+      │
+      ▼
+Conditional Checks
+      │
+      ▼
+Bean Creation
+      │
+      ▼
+Application Ready
+```
+
+---
+
+# ⚡ Conditional Annotations
+
+Spring Boot uses conditional annotations to decide whether to create a bean.
+
+---
+
+## @ConditionalOnClass
+
+Creates a bean only if a class exists.
+
+```java id="jlwm118"
+@ConditionalOnClass(DataSource.class)
+```
+
+---
+
+## @ConditionalOnMissingBean
+
+Creates a bean only if one does not already exist.
+
+```java id="jlwm119"
+@ConditionalOnMissingBean
+```
+
+---
+
+## @ConditionalOnProperty
+
+Creates a bean based on application properties.
+
+```java id="jlwm120"
+@ConditionalOnProperty(
+    name="server.port"
+)
+```
+
+---
+
+## @ConditionalOnBean
+
+Creates a bean only if another bean exists.
+
+```java id="jlwm121"
+@ConditionalOnBean
+```
+
+---
+
+# 💻 Example of Auto Configured Bean
+
+```java id="jlwm122"
+@Bean
+@ConditionalOnMissingBean
+public ObjectMapper objectMapper() {
+
+    return new ObjectMapper();
+
+}
+```
+
+If no ObjectMapper exists, Spring Boot creates one automatically.
+
+---
+
+# 🚫 Excluding Auto Configuration
+
+Sometimes you may not want a particular auto configuration.
+
+Example:
+
+```java id="jlwm123"
+@SpringBootApplication(
+exclude = {
+DataSourceAutoConfiguration.class
+})
+public class DemoApplication {
+
+}
+```
+
+---
+
+# ⚙ application.properties
+
+Auto Configuration can be customized.
+
+Example:
+
+```properties id="jlwm124"
+server.port=9090
+
+spring.datasource.url=
+jdbc:mysql://localhost:3306/studentdb
+```
+
+Spring Boot reads these properties and configures the application automatically.
+
+---
+
+# 🌍 Real-Life Example
+
+```text id="jlwm125"
+Buying a New Laptop
+
+Install Windows
+       │
+       ▼
+Drivers Installed Automatically
+       │
+       ▼
+WiFi Works
+Bluetooth Works
+Audio Works
+
+You don't manually configure everything.
+
+Spring Boot Auto Configuration works similarly.
+```
+
+---
+
+# ⭐ Advantages of Auto Configuration
+
+* Reduces Boilerplate Code
+* Faster Development
+* Easy Configuration
+* Production Ready
+* Less XML
+* Smart Defaults
+
+---
+
+# ❌ Limitations
+
+* Higher Memory Usage
+* Less Control
+* Sometimes Difficult to Debug
+* Unwanted Configurations May Load
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Auto Configuration?
+
+Auto Configuration automatically configures Spring Boot applications based on available dependencies.
+
+---
+
+### 2. Which annotation enables Auto Configuration?
+
+```java id="jlwm126"
+@EnableAutoConfiguration
+```
+
+---
+
+### 3. Which annotation combines Auto Configuration?
+
+```java id="jlwm127"
+@SpringBootApplication
+```
+
+---
+
+### 4. What is @ConditionalOnClass?
+
+Creates a bean only if a specific class exists.
+
+---
+
+### 5. What is @ConditionalOnMissingBean?
+
+Creates a bean only if it does not already exist.
+
+---
+
+### 6. Can Auto Configuration be disabled?
+
+Yes.
+
+Using:
+
+```java id="jlwm128"
+exclude = {
+DataSourceAutoConfiguration.class
+}
+```
+
+---
+
+### 7. How does Spring Boot know what to configure?
+
+It checks:
+
+* Dependencies
+* Classpath
+* Beans
+* Configuration Properties
+
+---
+
+### 8. What is the benefit of Auto Configuration?
+
+It reduces manual configuration and speeds up development.
+
+---
+
+### 9. What happens if spring-boot-starter-web is added?
+
+Spring Boot automatically configures:
+
+* Tomcat
+* Spring MVC
+* DispatcherServlet
+* JSON Support
+
+---
+
+### 10. Can developers override Auto Configuration?
+
+Yes. Custom bean definitions override the default configuration.
+
+---
+
+# 📝 Summary
+
+* Auto Configuration is a core feature of Spring Boot.
+* It automatically configures applications based on dependencies.
+* `@EnableAutoConfiguration` enables this feature.
+* `@SpringBootApplication` includes Auto Configuration.
+* Conditional annotations decide when beans should be created.
+* Developers can customize or disable Auto Configuration.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Embedded Server**
+
+* What is Embedded Server?
+* Embedded Tomcat
+* Embedded Jetty
+* Embedded Undertow
+* Default Port
+* Changing Server Port
+* Running Spring Boot Applications
