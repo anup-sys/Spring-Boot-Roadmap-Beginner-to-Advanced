@@ -1,0 +1,374 @@
+# Introduction to Java ☕
+
+## 📖 What is Java?
+
+**Java** is a high-level, object-oriented, class-based, and platform-independent programming language developed by **Sun Microsystems** (now owned by Oracle) in **1995**.
+
+Java is designed with the principle:
+
+> **"Write Once, Run Anywhere (WORA)"**
+
+This means that a Java program can run on any device that has a **Java Virtual Machine (JVM)** installed.
+
+---
+
+# 🚀 Why Learn Java?
+
+Java is one of the most popular programming languages in the world and is widely used for:
+
+* 🌐 Web Development
+* 📱 Android App Development
+* 🖥 Desktop Applications
+* ☁️ Cloud Computing
+* 🏦 Banking Systems
+* 🎮 Game Development
+* 📊 Big Data Technologies
+* 🤖 Enterprise Applications
+
+Many large companies use Java, including:
+
+* Google
+* Amazon
+* Netflix
+* LinkedIn
+* Uber
+* Spotify
+
+---
+
+# ⭐ Features of Java
+
+## 1. Simple
+
+Java has a simple syntax that is easy to learn and understand.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}
+```
+
+---
+
+## 2. Object-Oriented
+
+Java follows Object-Oriented Programming (OOP) concepts:
+
+* Class
+* Object
+* Inheritance
+* Polymorphism
+* Abstraction
+* Encapsulation
+
+---
+
+## 3. Platform Independent
+
+Java code is compiled into **Bytecode**, which can run on any operating system using JVM.
+
+```text
+Java Code
+    ↓
+Compiler
+    ↓
+Bytecode (.class)
+    ↓
+JVM
+    ↓
+Windows / Linux / macOS
+```
+
+---
+
+## 4. Secure
+
+Java provides several security features:
+
+* No explicit pointers
+* Bytecode verification
+* Security Manager
+* Runtime checking
+
+---
+
+## 5. Robust
+
+Java provides:
+
+* Exception Handling
+* Automatic Memory Management
+* Garbage Collection
+
+---
+
+## 6. Multithreaded
+
+Java supports multiple threads, allowing programs to perform several tasks simultaneously.
+
+Example:
+
+* Downloading a file
+* Playing music
+* Updating the UI
+
+All at the same time.
+
+---
+
+## 7. High Performance
+
+Java uses the **Just-In-Time (JIT) Compiler** to improve execution speed.
+
+---
+
+## 8. Distributed
+
+Java can create distributed applications that work across multiple systems over a network.
+
+---
+
+# 🏗 Java Architecture
+
+```text
+Java Source Code (.java)
+            │
+            ▼
+     Java Compiler (javac)
+            │
+            ▼
+      Bytecode (.class)
+            │
+            ▼
+     Java Virtual Machine
+            │
+            ▼
+Operating System
+(Windows/Linux/macOS)
+```
+
+---
+
+# ☕ Components of Java
+
+## JVM (Java Virtual Machine)
+
+* Executes Java Bytecode
+* Platform dependent
+
+## JRE (Java Runtime Environment)
+
+Contains:
+
+* JVM
+* Java Libraries
+* Supporting Files
+
+Used to run Java applications.
+
+## JDK (Java Development Kit)
+
+Contains:
+
+* JRE
+* JVM
+* Java Compiler
+* Debugger
+* Development Tools
+
+Used to develop Java applications.
+
+---
+
+# 📊 JDK vs JRE vs JVM
+
+| Feature            | JVM | JRE | JDK |
+| ------------------ | --- | --- | --- |
+| Runs Java Programs | ✅   | ✅   | ✅   |
+| JVM Included       | ❌   | ✅   | ✅   |
+| Compiler Included  | ❌   | ❌   | ✅   |
+| Development Tools  | ❌   | ❌   | ✅   |
+
+---
+
+# 🖥 First Java Program
+
+```java
+public class Main {
+    public static void main(String[] args) {
+
+        System.out.println("Hello, World!");
+
+    }
+}
+```
+
+### Output
+
+```text
+Hello, World!
+```
+
+---
+
+# 🔍 Program Explanation
+
+```java
+public class Main
+```
+
+Defines a class named **Main**.
+
+```java
+public static void main(String[] args)
+```
+
+This is the main method where program execution starts.
+
+```java
+System.out.println();
+```
+
+Prints output to the console.
+
+---
+
+# ⚙ How Java Program Works
+
+```text
+Write Code (.java)
+        │
+        ▼
+Compile using javac
+        │
+        ▼
+Generate Bytecode (.class)
+        │
+        ▼
+Run using java command
+        │
+        ▼
+JVM Executes Program
+```
+
+---
+
+# 💻 Compile and Run
+
+## Compile
+
+```bash
+javac Main.java
+```
+
+## Run
+
+```bash
+java Main
+```
+
+---
+
+# 🎯 Advantages of Java
+
+* Easy to Learn
+* Platform Independent
+* Secure
+* Object-Oriented
+* Robust
+* Portable
+* Multithreaded
+* Large Community Support
+* Huge Job Opportunities
+
+---
+
+# ❌ Limitations of Java
+
+* Slower than C/C++
+* Higher Memory Usage
+* Verbose Syntax
+* GUI Development is Less Popular Today
+
+---
+
+# 🌍 Applications of Java
+
+* Banking Applications
+* E-Commerce Platforms
+* Enterprise Software
+* Android Applications
+* Web Applications
+* Cloud Applications
+* IoT Systems
+* Big Data Tools
+
+---
+
+# 📚 Popular Java Frameworks
+
+* Spring Framework
+* Spring Boot
+* Hibernate
+* Struts
+* JSF
+* Micronaut
+* Quarkus
+
+---
+
+# 🎯 Interview Questions
+
+### 1. What is Java?
+
+Java is a high-level, object-oriented, platform-independent programming language.
+
+---
+
+### 2. Who developed Java?
+
+Sun Microsystems in 1995 (now Oracle).
+
+---
+
+### 3. What is JVM?
+
+JVM is the Java Virtual Machine that executes Java Bytecode.
+
+---
+
+### 4. What is JDK?
+
+JDK is the Java Development Kit used for developing Java applications.
+
+---
+
+### 5. What is JRE?
+
+JRE provides the environment required to run Java applications.
+
+---
+
+### 6. What is Bytecode?
+
+Bytecode is the intermediate code generated by the Java compiler.
+
+---
+
+### 7. What is WORA?
+
+Write Once, Run Anywhere.
+
+---
+
+# 📝 Summary
+
+* Java is an object-oriented programming language.
+* Java follows the WORA principle.
+* Java programs run on JVM.
+* JDK is used for development.
+* JRE is used for execution.
+* Java is widely used for backend, enterprise, and Android development.
+
