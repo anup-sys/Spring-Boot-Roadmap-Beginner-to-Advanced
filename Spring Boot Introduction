@@ -1,0 +1,476 @@
+# Spring Boot Introduction 🚀
+
+## 📖 What is Spring Boot?
+
+**Spring Boot** is an open-source Java framework built on top of the Spring Framework that simplifies the development of Java applications.
+
+It helps developers create **stand-alone, production-ready applications** with minimal configuration.
+
+Spring Boot was developed by **Pivotal Software** and first released in **2014**.
+
+---
+
+# 🎯 Why Spring Boot?
+
+Before Spring Boot, developers had to write a lot of XML configuration and manually manage dependencies.
+
+Spring Boot solves these problems by providing:
+
+* ✅ Auto Configuration
+* ✅ Starter Dependencies
+* ✅ Embedded Servers
+* ✅ Production Ready Features
+* ✅ Minimal Configuration
+* ✅ Rapid Application Development
+
+---
+
+# 🌟 Features of Spring Boot
+
+## 1. Auto Configuration
+
+Spring Boot automatically configures the application based on the dependencies available in the project.
+
+Example:
+
+If `spring-boot-starter-web` is added, Spring Boot automatically configures:
+
+* Tomcat Server
+* Dispatcher Servlet
+* Spring MVC
+
+---
+
+## 2. Starter Dependencies
+
+Starter dependencies provide pre-configured libraries.
+
+Examples:
+
+* spring-boot-starter-web
+* spring-boot-starter-data-jpa
+* spring-boot-starter-security
+* spring-boot-starter-test
+
+Example:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+---
+
+## 3. Embedded Server
+
+Spring Boot includes built-in servers like:
+
+* Tomcat (Default)
+* Jetty
+* Undertow
+
+No need to install an external web server.
+
+---
+
+## 4. Production Ready
+
+Spring Boot provides:
+
+* Health Checks
+* Metrics
+* Monitoring
+* Logging
+
+using Spring Boot Actuator.
+
+---
+
+## 5. Minimal Configuration
+
+No XML configuration is required.
+
+Spring Boot uses annotations and Java configuration.
+
+---
+
+# 🏗 Spring Boot Architecture
+
+```text
+                    Spring Boot
+                          │
+        ┌─────────────────┼─────────────────┐
+        │                 │                 │
+ Auto Configuration  Starter Dependencies  Actuator
+        │                 │
+        └──────────┬──────┘
+                   │
+          Spring Framework
+                   │
+                   ▼
+            Embedded Server
+                   │
+                   ▼
+               Application
+```
+
+---
+
+# 🔄 Spring vs Spring Boot
+
+| Spring Framework         | Spring Boot        |
+| ------------------------ | ------------------ |
+| Requires Configuration   | Auto Configuration |
+| External Server Required | Embedded Server    |
+| XML Configuration        | Annotation Based   |
+| Complex Setup            | Easy Setup         |
+| Slower Development       | Faster Development |
+
+---
+
+# 📦 Spring Boot Components
+
+## Spring Boot Starters
+
+Predefined dependency packages.
+
+Examples:
+
+* spring-boot-starter-web
+* spring-boot-starter-data-jpa
+* spring-boot-starter-security
+* spring-boot-starter-test
+
+---
+
+## Spring Boot Auto Configuration
+
+Automatically configures beans based on project dependencies.
+
+---
+
+## Spring Boot Actuator
+
+Provides production-ready features:
+
+* Health Monitoring
+* Metrics
+* Application Information
+
+---
+
+## Spring Boot CLI
+
+Command Line Interface for quickly creating Spring applications.
+
+---
+
+# 🚀 Spring Initializr
+
+Spring Initializr is an online tool used to create Spring Boot projects.
+
+You can choose:
+
+* Project Type
+* Language
+* Spring Boot Version
+* Dependencies
+
+Then download the project.
+
+---
+
+# 📂 Spring Boot Project Structure
+
+```text
+SpringBootProject/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   └── resources/
+│   │       ├── static/
+│   │       ├── templates/
+│   │       └── application.properties
+│   │
+│   └── test/
+│
+├── pom.xml
+└── mvnw
+```
+
+---
+
+# 📄 application.properties
+
+Used for configuring the application.
+
+Example:
+
+```properties
+server.port=8080
+
+spring.application.name=MyApp
+```
+
+---
+
+# 📄 application.yml
+
+YAML format configuration.
+
+```yaml
+server:
+  port: 8080
+
+spring:
+  application:
+    name: MyApp
+```
+
+---
+
+# 🏷 Important Spring Boot Annotations
+
+## @SpringBootApplication
+
+Main annotation that combines:
+
+* @Configuration
+* @EnableAutoConfiguration
+* @ComponentScan
+
+Example:
+
+```java
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(
+            DemoApplication.class, args
+        );
+    }
+
+}
+```
+
+---
+
+## @RestController
+
+Marks a class as a REST Controller.
+
+```java
+@RestController
+public class HomeController {
+
+}
+```
+
+---
+
+## @Component
+
+Creates a Spring Bean.
+
+```java
+@Component
+public class Student {
+
+}
+```
+
+---
+
+## @Autowired
+
+Injects dependencies automatically.
+
+```java
+@Autowired
+private Student student;
+```
+
+---
+
+# 💻 First Spring Boot Program
+
+```java
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class HomeController {
+
+    @GetMapping("/")
+    public String home() {
+        return "Welcome to Spring Boot!";
+    }
+
+}
+```
+
+### Output
+
+```text
+Welcome to Spring Boot!
+```
+
+---
+
+# ⚙ How Spring Boot Application Works
+
+```text
+Write Code
+     │
+     ▼
+@SpringBootApplication
+     │
+     ▼
+Spring Boot Starts
+     │
+     ▼
+Auto Configuration
+     │
+     ▼
+Embedded Tomcat Starts
+     │
+     ▼
+Application Ready
+```
+
+---
+
+# 🌍 Real-Life Example
+
+```text
+Restaurant
+
+Customer
+    │
+    ▼
+Orders Food
+    │
+    ▼
+Kitchen Automatically Prepares
+    │
+    ▼
+Waiter Delivers
+
+Customer does not manage the kitchen.
+
+Similarly, Spring Boot automatically manages configuration.
+```
+
+---
+
+# ⭐ Advantages of Spring Boot
+
+* Rapid Development
+* Easy Configuration
+* Embedded Server
+* Production Ready
+* Easy Dependency Management
+* Microservices Friendly
+* Large Community Support
+
+---
+
+# ❌ Limitations
+
+* Higher Memory Consumption
+* Less Control over Auto Configuration
+* Not Ideal for Very Small Applications
+
+---
+
+# 🎤 Interview Questions
+
+### 1. What is Spring Boot?
+
+Spring Boot is a framework that simplifies Spring application development.
+
+---
+
+### 2. What is the difference between Spring and Spring Boot?
+
+Spring requires manual configuration, whereas Spring Boot provides auto configuration.
+
+---
+
+### 3. What is @SpringBootApplication?
+
+It is a combination of:
+
+* @Configuration
+* @EnableAutoConfiguration
+* @ComponentScan
+
+---
+
+### 4. What are Starter Dependencies?
+
+Pre-configured dependency packages for common functionalities.
+
+---
+
+### 5. What is Auto Configuration?
+
+A feature that automatically configures the application based on available dependencies.
+
+---
+
+### 6. What is Embedded Tomcat?
+
+A built-in web server included with Spring Boot.
+
+---
+
+### 7. What is Spring Initializr?
+
+A tool used to generate Spring Boot projects.
+
+---
+
+### 8. What is application.properties?
+
+A configuration file used to configure Spring Boot applications.
+
+---
+
+### 9. What is Actuator?
+
+A Spring Boot module that provides monitoring and management features.
+
+---
+
+### 10. Why is Spring Boot popular?
+
+Because it reduces boilerplate code and enables rapid application development.
+
+---
+
+# 📝 Summary
+
+* Spring Boot is built on top of Spring Framework.
+* It simplifies Java application development.
+* Provides Auto Configuration and Starter Dependencies.
+* Includes an Embedded Server.
+* Uses annotations instead of XML.
+* Supports production-ready features.
+
+---
+
+## 🚀 Next Topic
+
+➡️ **Spring Initializr**
+
+* What is Spring Initializr?
+* Creating First Spring Boot Project
+* Maven vs Gradle Project
+* Project Metadata
+* Selecting Dependencies
+* Importing into IntelliJ & VS Code
+* Running the First Spring Boot Application
